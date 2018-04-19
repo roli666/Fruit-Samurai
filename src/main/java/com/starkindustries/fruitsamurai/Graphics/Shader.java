@@ -6,10 +6,13 @@
 package com.starkindustries.fruitsamurai.Graphics;
 
 
+import java.nio.FloatBuffer;
 import java.util.HashMap;
 import java.util.Map;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+import org.lwjgl.system.MemoryStack;
+
 import static org.lwjgl.opengl.GL20.*;
 
 /**
@@ -21,10 +24,11 @@ public class Shader {
 	private int vertexShaderId;
 	private int fragmentShaderId;
 
-	private Map<String, Integer> locationCache = new HashMap<String, Integer>();
+	private Map<String, Integer> uniforms;
 
 	public Shader() throws Exception {
 		ID = glCreateProgram();
+		uniforms = new HashMap<String, Integer>();
 		if (ID == 0)
 			throw new Exception("Could not create Shader");
 	}
@@ -81,16 +85,16 @@ public class Shader {
 	}
 
 	public int getUniform(String name) {
-		if (locationCache.containsKey(name)) {
-			return locationCache.get(name);
+		if (uniforms.containsKey(name)) {
+			return uniforms.get(name);
 		}
-		int result = glGetUniformLocation(ID, name);
-		if (result == -1) {
+		int uniformlocation = glGetUniformLocation(ID, name);
+		if (uniformlocation == -1) {
 			System.err.println("Could not find uniform variable '" + name + "' .");
 		} else {
-			locationCache.put(name, result);
+			uniforms.put(name, uniformlocation);
 		}
-		return result;
+		return uniformlocation;
 	}
 
 	public void setUniform1i(String name, int value) {
@@ -110,9 +114,12 @@ public class Shader {
 	}
 
 	public void setUniformMat4f(String name, Matrix4f mat) {
-		float[] buffer = new float[16];
-		mat.get(buffer);
-		glUniformMatrix4fv(getUniform(name), false, buffer);
+		try (MemoryStack stack = MemoryStack.stackPush()) 
+		{
+			FloatBuffer fb = stack.mallocFloat(16);
+			mat.get(fb);
+			glUniformMatrix4fv(getUniform(name), false, fb);
+		}
 	}
 
 	public void cleanup() {

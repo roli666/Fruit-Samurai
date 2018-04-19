@@ -1,7 +1,6 @@
 package com.starkindustries.fruitsamurai.Meshes;
 
 import com.starkindustries.fruitsamurai.Graphics.Texture;
-import com.starkindustries.fruitsamurai.Graphics.VertexArray;
 import com.starkindustries.fruitsamurai.Utils.FileUtils;
 import org.joml.Vector3f;
 
@@ -9,7 +8,6 @@ public class Sword {
 
     private boolean slashing;
     private float SIZE;
-    private VertexArray mesh;
     private Texture texture;
 
     private Vector3f position = new Vector3f();
@@ -36,7 +34,6 @@ public class Sword {
                 1, 1
         };
 
-        mesh = new VertexArray(vertices, indices, tcs);
         texture = new Texture(FileUtils.getTexturesFolder() + "\\sword.png");
         slashing = false;
     }

@@ -12,14 +12,31 @@ public class FruitSamurai implements IGameLogic {
     private float color = 0.0f;
     private final Renderer renderer;
     private boolean slashing = false;
+    private Mesh mesh;
 
     public FruitSamurai() {
         renderer = new Renderer();
     }
 
     @Override
-    public void init() throws Exception {
-        renderer.init();
+    public void init(Window window) throws Exception {
+        renderer.init(window);
+        float[] vertices = new float[]{
+        		-10f, 10f, 0f,
+        		-10f, -10f, 0f,
+        		10f, -10f, 0f,
+        		10f, 10f, 0f,
+            };
+    	int[] indices = new int[] {
+        		0,1,2,0,3,2
+        	};
+    	float[] colors = new float[]{
+    			0.5f, 0.0f, 0.0f,
+    			0.0f, 0.5f, 0.0f,
+    			0.0f, 0.0f, 0.5f,
+    			0.0f, 0.5f, 0.5f,
+    			};
+    	mesh = new Mesh(vertices,colors,indices);
     }
 
     @Override
@@ -54,26 +71,8 @@ public class FruitSamurai implements IGameLogic {
 
     @Override
     public void render(Window window) {
-    	float[] vertices = new float[]{
-    			-0.5f, 0.5f, 0.0f, //0
-    			-0.5f, -0.5f, 0.0f,//1
-    			0.5f,-0.5f, 0.0f,//2
-    			0.5f, 0.5f, 0.0f,//3
-            };
-    	int[] indices = new int[] {
-        		0,1,2,0,3,2
-        	};
-    	float[] colors = new float[]{
-    			0.5f, 0.0f, 0.0f,
-    			0.0f, 0.5f, 0.0f,
-    			0.0f, 0.0f, 0.5f,
-    			0.0f, 0.5f, 0.5f,
-    			};
-
-    	Mesh mesh = new Mesh(vertices,colors,indices);
         window.setClearColor(color, color, color, 0.0f);
-        renderer.render(window);
-        renderer.render(mesh);
+        renderer.render(window,mesh);
     }
 
     @Override
