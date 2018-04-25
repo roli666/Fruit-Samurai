@@ -84,7 +84,7 @@ public class Shader {
 		glUseProgram(0);
 	}
 
-	public int getUniform(String name) {
+	public int createUniform(String name) {
 		if (uniforms.containsKey(name)) {
 			return uniforms.get(name);
 		}
@@ -98,19 +98,19 @@ public class Shader {
 	}
 
 	public void setUniform1i(String name, int value) {
-		glUniform1i(getUniform(name), value);
+		glUniform1i(createUniform(name), value);
 	}
 
 	public void setUniform1f(String name, float value) {
-		glUniform1f(getUniform(name), value);
+		glUniform1f(createUniform(name), value);
 	}
 
 	public void setUniform2f(String name, float x, float y) {
-		glUniform2f(getUniform(name), x, y);
+		glUniform2f(createUniform(name), x, y);
 	}
 
 	public void setUniform3f(String name, Vector3f vec) {
-		glUniform3f(getUniform(name), vec.x, vec.y, vec.z);
+		glUniform3f(createUniform(name), vec.x, vec.y, vec.z);
 	}
 
 	public void setUniformMat4f(String name, Matrix4f mat) {
@@ -118,7 +118,7 @@ public class Shader {
 		{
 			FloatBuffer fb = stack.mallocFloat(16);
 			mat.get(fb);
-			glUniformMatrix4fv(getUniform(name), false, fb);
+			glUniformMatrix4fv(createUniform(name), false, fb);
 		}
 	}
 

@@ -2,6 +2,7 @@ package com.starkindustries.fruitsamurai.GameLogic;
 
 import com.starkindustries.fruitsamurai.Engine.Renderer;
 import com.starkindustries.fruitsamurai.Engine.Window;
+import com.starkindustries.fruitsamurai.Graphics.GameItem;
 import com.starkindustries.fruitsamurai.Graphics.Mesh;
 import com.starkindustries.fruitsamurai.Interfaces.IGameLogic;
 
@@ -70,9 +71,9 @@ public class FruitSamurai implements IGameLogic {
     }
 
     @Override
-    public void render(Window window) {
+    public void render(Window window,GameItem[] items) {
         window.setClearColor(color, color, color, 0.0f);
-        renderer.render(window,mesh);
+        renderer.render(window,items);
     }
 
     @Override
