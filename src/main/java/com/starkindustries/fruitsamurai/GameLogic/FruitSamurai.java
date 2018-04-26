@@ -4,9 +4,15 @@ import com.starkindustries.fruitsamurai.Engine.Renderer;
 import com.starkindustries.fruitsamurai.Engine.Window;
 import com.starkindustries.fruitsamurai.Graphics.GameItem;
 import com.starkindustries.fruitsamurai.Graphics.Mesh;
+import com.starkindustries.fruitsamurai.Graphics.Texture;
 import com.starkindustries.fruitsamurai.Interfaces.IGameLogic;
+import com.starkindustries.fruitsamurai.Utils.FileUtils;
+import com.starkindustries.fruitsamurai.Utils.OBJLoader;
 
 import static org.lwjgl.glfw.GLFW.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FruitSamurai implements IGameLogic {
     private int direction = 0;
@@ -14,6 +20,7 @@ public class FruitSamurai implements IGameLogic {
     private final Renderer renderer;
     private boolean slashing = false;
     private Mesh mesh;
+    private List<GameItem> items = new ArrayList<>();
 
     public FruitSamurai() {
         renderer = new Renderer();
@@ -31,13 +38,23 @@ public class FruitSamurai implements IGameLogic {
     	int[] indices = new int[] {
         		0,1,2,0,3,2
         	};
-    	float[] colors = new float[]{
-    			0.5f, 0.0f, 0.0f,
-    			0.0f, 0.5f, 0.0f,
-    			0.0f, 0.0f, 0.5f,
-    			0.0f, 0.5f, 0.5f,
-    			};
-    	mesh = new Mesh(vertices,colors,indices);
+    	float[] textcoords = new float[]{
+    			1f, 1f,
+                1f, 0f,
+                0f, 0f,
+                0f, 1f,
+    		};
+    	float[] normals = new float[]{
+    			1f,1f,1f,
+    		};
+    	Texture texture = new Texture(FileUtils.getTexturesFolder()+"\\background_def.jpg");
+    	Mesh m_melon = OBJLoader.loadmesh(FileUtils.getMeshesFolder()+"\\melon.obj");
+    	Mesh m_background = new Mesh(vertices, indices, textcoords, normals);
+    	m_background.setTexture(texture);
+    	GameItem melon = new GameItem(m_melon);
+    	GameItem background = new GameItem(m_background);
+    	items.add(background);
+    	//items.add(melon);
     }
 
     @Override
@@ -71,7 +88,7 @@ public class FruitSamurai implements IGameLogic {
     }
 
     @Override
-    public void render(Window window,GameItem[] items) {
+    public void render(Window window) {
         window.setClearColor(color, color, color, 0.0f);
         renderer.render(window,items);
     }
@@ -79,6 +96,9 @@ public class FruitSamurai implements IGameLogic {
     @Override
     public void cleanup() {
         renderer.cleanup();
+        for (GameItem gameItem : items) {
+            gameItem.getMesh().cleanUp();
+        }
     }
 
 }

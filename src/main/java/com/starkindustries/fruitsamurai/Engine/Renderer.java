@@ -1,13 +1,16 @@
 package com.starkindustries.fruitsamurai.Engine;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL20.*;
-import static org.lwjgl.opengl.GL30.*;
+//import static org.lwjgl.opengl.GL20.*;
+//import static org.lwjgl.opengl.GL30.*;
+
+import java.util.List;
 
 import org.joml.Matrix4f;
 
 import com.starkindustries.fruitsamurai.Graphics.GameItem;
 import com.starkindustries.fruitsamurai.Graphics.Mesh;
+//import com.starkindustries.fruitsamurai.Graphics.Mesh;
 import com.starkindustries.fruitsamurai.Graphics.Shader;
 import com.starkindustries.fruitsamurai.Graphics.Transformations;
 import com.starkindustries.fruitsamurai.Utils.FileUtils;
@@ -30,6 +33,9 @@ public class Renderer {
 		projection_matrix = new Matrix4f().ortho(-10, 10, 10, -10, 0, 10);
 		shaderProgram.createUniform("projection_matrix");
 		shaderProgram.createUniform("world_matrix");
+		shaderProgram.createUniform("texture_sampler");
+		shaderProgram.createUniform("color");
+		shaderProgram.createUniform("use_color");
 		// projection_matrix = new
 		// Matrix4f().perspective((float)Math.toRadians(60),(float)window.getWidth()/window.getHeight(),
 		// 0.01f, 1000.0f);
@@ -40,7 +46,7 @@ public class Renderer {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
-	public void render(Window window, GameItem[] items) {
+	public void render(Window window, List<GameItem> items) {
 		clear();
 
 		if (window.isResized()) {
@@ -48,17 +54,21 @@ public class Renderer {
 			window.setResized(false);
 		}
 		shaderProgram.bind();
+		shaderProgram.setUniform1i("texture_sampler", 0);
 		shaderProgram.setUniformMat4f("projection_matrix", projection_matrix);
 		for (GameItem gameItem : items) {
+			Mesh mesh = gameItem.getMesh();
 			// Set world matrix for this item
 			Matrix4f worldMatrix = transformation.getWorldMatrix(
 					gameItem.getPosition(),
 					gameItem.getRotation(),
 					gameItem.getScale()
 					);
-			shaderProgram.setUniformMat4f("worldMatrix", worldMatrix);
+			shaderProgram.setUniformMat4f("world_matrix", worldMatrix);
+			shaderProgram.setUniform3f("color", mesh.getColor());
+			shaderProgram.setUniform1i("use_color", mesh.isTextured() ? 0 : 1);
 			// Render the mesh for this game item
-			gameItem.getMesh().render();
+			mesh.render();
 		}
 		shaderProgram.unbind();
 	}
