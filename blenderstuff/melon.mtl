@@ -1,0 +1,12 @@
+# Blender MTL File: 'melon.blend'
+# Material Count: 1
+
+newmtl Material.001
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.003551 0.287070 0.002014
+Ks 0.017869 0.129905 0.000372
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2

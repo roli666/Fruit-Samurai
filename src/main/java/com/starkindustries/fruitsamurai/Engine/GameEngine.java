@@ -1,5 +1,6 @@
 package com.starkindustries.fruitsamurai.Engine;
 
+import com.bulletphysics.dynamics.DynamicsWorld;
 import com.starkindustries.fruitsamurai.Interfaces.IGameLogic;
 
 public class GameEngine implements Runnable {

@@ -31,15 +31,14 @@ public class Renderer {
 		shaderProgram.createFragmentShader(FileUtils.loadAsString(FileUtils.getShadersFolder() + "\\bg_def.fs"));
 		shaderProgram.link();
 		projection_matrix = new Matrix4f().ortho(-10, 10, 10, -10, 0, 10);
+		//projection_matrix = new
+		//Matrix4f().perspective((float)Math.toRadians(60),(float)window.getWidth()/window.getHeight(),
+		// 0.01f, 1000.0f);
 		shaderProgram.createUniform("projection_matrix");
 		shaderProgram.createUniform("world_matrix");
 		shaderProgram.createUniform("texture_sampler");
 		shaderProgram.createUniform("color");
 		shaderProgram.createUniform("use_color");
-		// projection_matrix = new
-		// Matrix4f().perspective((float)Math.toRadians(60),(float)window.getWidth()/window.getHeight(),
-		// 0.01f, 1000.0f);
-
 	}
 
 	public void clear() {
