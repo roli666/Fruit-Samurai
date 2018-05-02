@@ -11,15 +11,20 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Window {
     private long windowID;
+
     private int width;
     private int height;
+    private int xpos;
+    private int ypos;
     private boolean vsync;
     private boolean resized = false;
     private final String windowtitle;
     @SuppressWarnings("unused")
-	private GLFWCursorPosCallback posCallback;
+    private GLFWCursorPosCallback posCallback;
     private double mouseX;
     private double mouseY;
+    private boolean fullscreen;
+    public  boolean[] keys = new boolean[65536];
 
     public Window(String title, int width, int height, boolean vSync) {
         this.windowtitle = title;
@@ -27,6 +32,7 @@ public class Window {
         this.height = height;
         this.vsync = vSync;
         this.resized = false;
+        this.fullscreen = false;
     }
 
     public void init() {
@@ -65,10 +71,19 @@ public class Window {
             if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE) {
                 glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
             }
+            /*if (isKeyReleased(GLFW_KEY_F12) && fullscreen){
+                glfwSetWindowMonitor(windowID,0L,xpos,ypos,width,height,GLFW_DONT_CARE);
+                fullscreen = !fullscreen;
+            }
+            else
+            {
+                glfwSetWindowMonitor(windowID, glfwGetPrimaryMonitor(), xpos, ypos, width, height, GLFW_DONT_CARE);
+                fullscreen = !fullscreen;
+            }*/
         });
         glfwSetCursorPosCallback(windowID, posCallback = GLFWCursorPosCallback.create((window, xpos, ypos) -> {
             mouseX = xpos;
-            mouseY= ypos;
+            mouseY = ypos;
         }));
 
         // Get the resolution of the primary monitor
@@ -105,22 +120,22 @@ public class Window {
     public boolean isKeyPressed(int keyCode) {
         return glfwGetKey(windowID, keyCode) == GLFW_PRESS;
     }
+
     public boolean isKeyReleased(int keyCode) {
         return glfwGetKey(windowID, keyCode) == GLFW_RELEASE;
     }
+
+
     public boolean isMouseKeyPressed(int keyCode) {
         return glfwGetMouseButton(windowID, keyCode) == GLFW_PRESS;
     }
+
     public boolean isMouseKeyReleased(int keyCode) {
         return glfwGetMouseButton(windowID, keyCode) == GLFW_RELEASE;
     }
 
     public boolean windowShouldClose() {
         return glfwWindowShouldClose(windowID);
-    }
-
-    public String getTitle() {
-        return windowtitle;
     }
 
     public int getWidth() {
@@ -151,6 +166,20 @@ public class Window {
         glfwSwapBuffers(windowID);
         glfwPollEvents();
     }
-    public double getMouseX(){return mouseX;}
-    public double getMouseY(){return mouseY;}
+
+    public double getMouseX() {
+        return mouseX;
+    }
+
+    public double getMouseY() {
+        return mouseY;
+    }
+
+    public void hideMouse() {
+        glfwSetInputMode(windowID, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+    }
+
+    public void showMouse() {
+        glfwSetInputMode(windowID, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+    }
 }

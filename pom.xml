@@ -277,5 +277,11 @@
 			<artifactId>jbullet</artifactId>
 			<version>20101010-1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.lwjgl</groupId>
+			<artifactId>lwjgl-assimp</artifactId>
+			<version>${lwjgl.version}</version>
+			<scope>runtime</scope>
+		</dependency>
 	</dependencies>
 </project>

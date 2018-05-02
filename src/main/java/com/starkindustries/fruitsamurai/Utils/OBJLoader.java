@@ -3,6 +3,7 @@ package com.starkindustries.fruitsamurai.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.starkindustries.fruitsamurai.Graphics.Material;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 
@@ -10,15 +11,20 @@ import com.starkindustries.fruitsamurai.Graphics.Mesh;
 
 public class OBJLoader {
 	public static Mesh loadmesh(String file) throws Exception {
+
 		List<String> lines = FileUtils.loadAsStringList(file);
 		List<Vector3f> vertices = new ArrayList<>();
 		List<Vector2f> textures = new ArrayList<>();
 		List<Vector3f> normals = new ArrayList<>();
 		List<Face> faces = new ArrayList<>();
+		String mtlFileName = null;
 		
 		for (String line : lines) {
             String[] tokens = line.split("\\s+");
             switch (tokens[0]) {
+                case "mtllib":
+                    mtlFileName = FileUtils.getMeshesFolder() + tokens[1];
+                    break;
                 case "v":
                     // Geometric vertex
                     Vector3f vec3f = new Vector3f(
@@ -51,11 +57,47 @@ public class OBJLoader {
                     break;
             }
         }
-        return reorderLists(vertices, textures, normals, faces);
+        Material mat = null;
+        if(mtlFileName!=null) {
+            lines = FileUtils.loadAsStringList(mtlFileName);
+            for (String line : lines) {
+                String[] tokens = line.split("\\s+");
+                switch (tokens[0]) {
+                    case "newmtl":
+                        mat = new Material(tokens[1]);
+                        break;
+                    case "Ns":
+                        mat.setNs(Float.parseFloat(tokens[1]));
+                        break;
+                    case "Ka":
+                        mat.setKa(new Vector3f(Float.parseFloat(tokens[1]),Float.parseFloat(tokens[2]),Float.parseFloat(tokens[3])));
+                        break;
+                    case "Kd":
+                        mat.setKd(new Vector3f(Float.parseFloat(tokens[1]),Float.parseFloat(tokens[2]),Float.parseFloat(tokens[3])));
+                        break;
+                    case "Ks":
+                        mat.setKs(new Vector3f(Float.parseFloat(tokens[1]),Float.parseFloat(tokens[2]),Float.parseFloat(tokens[3])));
+                        break;
+                    case "Ke":
+                        mat.setKe(new Vector3f(Float.parseFloat(tokens[1]),Float.parseFloat(tokens[2]),Float.parseFloat(tokens[3])));
+                        break;
+                    case "Ni":
+                        mat.setNi(Float.parseFloat(tokens[1]));
+                        break;
+                    case "d":
+                        mat.setD(Float.parseFloat(tokens[1]));
+                        break;
+                    case "illum":
+                        mat.setIllum(Float.parseFloat(tokens[1]));
+                        break;
+                }
+            }
+        }
+        return reorderLists(vertices, textures, normals, faces, mat);
 	}
 
 	private static Mesh reorderLists(List<Vector3f> posList, List<Vector2f> textCoordList,
-            List<Vector3f> normList, List<Face> facesList) {
+            List<Vector3f> normList, List<Face> facesList,Material mat) {
 
         List<Integer> indices = new ArrayList<>();
         // Create position array in the order it has been declared
@@ -80,6 +122,7 @@ public class OBJLoader {
         int[] indicesArr = new int[indices.size()];
         indicesArr = indices.stream().mapToInt((Integer v) -> v).toArray();
         Mesh mesh = new Mesh(posArr, indicesArr, textCoordArr, normArr);
+        mesh.setMaterial(mat);
         return mesh;
     }
 	

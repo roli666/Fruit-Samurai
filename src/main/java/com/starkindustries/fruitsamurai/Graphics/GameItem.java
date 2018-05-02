@@ -10,8 +10,9 @@ public class GameItem {
 	private Vector3f acceleration;
 	private Vector3f velocity;
 	public boolean isFruit;
-	public boolean affectedByPhysics;
+	public boolean affectedByPhysics = false;
 	public boolean menuItem = false;
+	public boolean visible = true;
 
 	public GameItem(Mesh mesh) 
 	{

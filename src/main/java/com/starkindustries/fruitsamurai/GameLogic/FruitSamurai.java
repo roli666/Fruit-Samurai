@@ -29,17 +29,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.joml.Matrix3dc;
-import org.joml.Matrix3fc;
-import org.joml.Matrix3x2fc;
-import org.joml.Matrix4dc;
-import org.joml.Matrix4fc;
-import org.joml.Matrix4x3fc;
-import org.joml.Quaternionf;
-import org.joml.Quaternionfc;
-import org.joml.Vector3d;
-import org.joml.Vector3f;
-import org.joml.Vector3fc;
+import org.joml.*;
 
 public class FruitSamurai implements IGameLogic {
     private int direction = 0;
@@ -49,11 +39,13 @@ public class FruitSamurai implements IGameLogic {
     private List<GameItem> items = new ArrayList<>();
     private GameItem melon;
     private GameItem background;
+    private GameItem sword;
     private Mesh m_melon;
+    private Mesh m_background;
+    private Mesh m_sword;
     private static DynamicsWorld dynamicsWorld;
     private static Set<RigidBody> bodies = new HashSet<>();
-    private static boolean appyForce = false;
-    private Timer physicstimer = new Timer();
+    private StringBuilder sb;
 
     public FruitSamurai() {
         renderer = new Renderer();
@@ -67,59 +59,47 @@ public class FruitSamurai implements IGameLogic {
     	ConstraintSolver solver = new SequentialImpulseConstraintSolver();
     	dynamicsWorld = new DiscreteDynamicsWorld(disp, broadphase, solver, collconf);
     	dynamicsWorld.setGravity(new javax.vecmath.Vector3f(0,-0.1f,0));*/
-        physicstimer.init();
+        sb = new StringBuilder();
     	renderer.init(window);
-        float[] vertices = new float[]{
-        		-10f, 10f, -2f,
-        		-10f, -10f, -2f,
-        		10f, -10f, -2f,
-        		10f, 10f, -2f,
-            };
-    	int[] indices = new int[] {
-        		0,1,2,0,3,2
-        	};
-    	float[] textcoords = new float[]{
-    			1f, 1f,
-                1f, 0f,
-                0f, 0f,
-                0f, 1f,
-    		};
-    	float[] normals = new float[]{
-    			0f,0f,0f,
-    		};
-    	Texture background_t = new Texture(FileUtils.getTexturesFolder()+"\\background_def.jpg");
-    	Texture melon_t = new Texture(FileUtils.getTexturesFolder()+"\\melon_t.png");
-    	m_melon = OBJLoader.loadmesh(FileUtils.getMeshesFolder()+"\\melon.obj");
-    	Mesh m_background = new Mesh(vertices, indices, textcoords, normals);
+    	Texture background_t = new Texture(FileUtils.getTexturesFolder()+"background_def.jpg");
+    	Texture melon_t = new Texture(FileUtils.getTexturesFolder()+"melon_t.png");
+        Texture sword_t = new Texture(FileUtils.getTexturesFolder()+"sword.png");
+    	m_melon = OBJLoader.loadmesh(FileUtils.getMeshesFolder()+"melon.obj");
+        m_background = OBJLoader.loadmesh(FileUtils.getMeshesFolder()+"background.obj");
+        m_sword = OBJLoader.loadmesh(FileUtils.getMeshesFolder()+"sword.obj");
     	m_background.setTexture(background_t);
+        m_sword.setTexture(sword_t);
     	m_melon.setTexture(melon_t);
     	melon = new GameItem(m_melon);
     	background = new GameItem(m_background);
-    	items.add(background);
-    	melon.affectedByPhysics = false;
+        sword = new GameItem(m_sword);
+        sword.visible = false;
     	melon.setAcceleration(new Vector3f(0,0,0));
     	melon.setPosition(-5,0,0);
     	melon.menuItem = true;
+    	melon.setScale(2);
+        items.add(background);
     	items.add(melon);
+        items.add(sword);
     	
     }
 
     @Override
     public void input(Window window) {
-        if ( window.isKeyPressed(GLFW_KEY_UP) ) {
-            direction = 1;
-        } else if ( window.isKeyPressed(GLFW_KEY_DOWN) ) {
-            direction = -1;
-        } else {
-            direction = 0;
-        }
+
+
         if(window.isMouseKeyPressed(GLFW_MOUSE_BUTTON_1)){
             slashing = true;
-            System.out.println("Slashing at X:" + window.getMouseX() + " Y:" + window.getMouseY());
+            sword.visible = true;
+            window.hideMouse();
+            sword.setPosition((float) window.getMouseX()/window.getWidth()*2*16-16, (float) window.getMouseY()/window.getHeight()*2*16-16,sword.getPosition().z);
+            System.out.println(String.format("Slashing at X:%.2f Y:%.2f",window.getMouseX()/window.getWidth()*2*10-10,window.getMouseY()/window.getHeight()*2*10-10));
         }
         if(window.isMouseKeyReleased(GLFW_MOUSE_BUTTON_1) && slashing == true)
         {
             slashing = false;
+            sword.visible = false;
+            window.showMouse();
             System.out.println("Stopped Slashing");
         }
         if ( window.isKeyPressed(GLFW_KEY_SPACE) ) {
@@ -128,6 +108,14 @@ public class FruitSamurai implements IGameLogic {
            	melone.affectedByPhysics = true;
            	melone.setAcceleration(new Vector3f(0f,-0.5f,0));
            	items.add(melone);
+        }
+        if ( window.isKeyPressed(GLFW_KEY_DOWN) ) {
+            Vector4f asd = renderer.getAmbient_light().add(-0.01f,-0.01f,-0.01f,0);
+            renderer.setAmbient_light(asd);
+        }
+        if ( window.isKeyPressed(GLFW_KEY_UP) ) {
+            Vector4f asd = renderer.getAmbient_light().add(0.01f,0.01f,0.01f,0);
+            renderer.setAmbient_light(asd);
         }
     }
 
@@ -174,5 +162,4 @@ public class FruitSamurai implements IGameLogic {
             gameItem.getMesh().cleanUp();
         }
     }
-
 }

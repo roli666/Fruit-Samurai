@@ -63,7 +63,7 @@ public class FileUtils {
         return result;
     }
 
-    public static String getTexturesFolder(){return textures.toString();}
-    public static String getShadersFolder(){return shaders.toString();}
-    public static String getMeshesFolder(){return meshes.toString();}
+    public static String getTexturesFolder(){return textures.toString()+"\\";}
+    public static String getShadersFolder(){return shaders.toString()+"\\";}
+    public static String getMeshesFolder(){return meshes.toString()+"\\";}
 }

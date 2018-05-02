@@ -1,12 +1,13 @@
-# Blender MTL File: 'None'
+# Blender MTL File: 'melon.blend'
 # Material Count: 1
 
-newmtl Material.001
+newmtl Material.002
 Ns 96.078431
 Ka 1.000000 1.000000 1.000000
-Kd 0.003551 0.287070 0.002014
-Ks 0.013653 0.095088 0.000322
+Kd 0.800000 0.704073 0.725875
+Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd C:\Users\Epic\Desktop\fruitsamurai-code\src\main\resources\textures\melon_t.png
