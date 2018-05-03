@@ -19,7 +19,6 @@ public class Mesh {
     private final int vaoId;
     private final List<Integer> vboIdList;
     private final int vertexCount;
-    private Texture texture;
     private Vector3f color;
     private Vector3f DEFAULT_COLOR = new Vector3f(1f, 1f, 1f);
     private Material mat;
@@ -88,21 +87,9 @@ public class Mesh {
                 MemoryUtil.memFree(textureBuffer);
             }
             if (normalsBuffer != null) {
-                MemoryUtil.memFree(textureBuffer);
+                MemoryUtil.memFree(normalsBuffer);
             }
         }
-    }
-
-    public boolean isTextured() {
-        return this.texture != null;
-    }
-
-    public Texture getTexture() {
-        return this.texture;
-    }
-
-    public void setTexture(Texture texture) {
-        this.texture = texture;
     }
 
     public void setColor(Vector3f color) {
@@ -117,6 +104,10 @@ public class Mesh {
         return mat;
     }
 
+    public boolean hasMaterial() {
+        return mat != null;
+    }
+
     public Vector3f getColor() {
         return this.color;
     }
@@ -129,12 +120,21 @@ public class Mesh {
         return vertexCount;
     }
 
-    public void render() {
+
+    protected void initRender() {
+        Texture texture = mat != null ? mat.getTexture() : null;
         if (texture != null) {
-            // Activate firs texture bank
+            // Activate first texture bank
             glActiveTexture(GL_TEXTURE0);
             // Bind the texture
             glBindTexture(GL_TEXTURE_2D, texture.getID());
+        }
+        Texture normalMap = mat != null ? mat.getNormalMap() : null;
+        if (normalMap != null) {
+            // Activate second texture bank
+            glActiveTexture(GL_TEXTURE1);
+            // Bind the texture
+            glBindTexture(GL_TEXTURE_2D, normalMap.getID());
         }
 
         // Draw the mesh
@@ -142,26 +142,41 @@ public class Mesh {
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
         glEnableVertexAttribArray(2);
+    }
 
-        glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
-
+    protected void endRender() {
         // Restore state
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
         glDisableVertexAttribArray(2);
         glBindVertexArray(0);
+
         glBindTexture(GL_TEXTURE_2D, 0);
+    }
+
+    public void render() {
+        initRender();
+
+        glDrawElements(GL_TRIANGLES, getVertexCount(), GL_UNSIGNED_INT, 0);
+
+        endRender();
     }
 
     public void cleanUp() {
         glDisableVertexAttribArray(0);
-        // Delete the VBO
+
+        // Delete the VBOs
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         for (int vboId : vboIdList) {
             glDeleteBuffers(vboId);
         }
-        if (texture != null)
+
+        // Delete the texture
+        Texture texture = mat.getTexture();
+        if (texture != null) {
             texture.cleanup();
+        }
+
         // Delete the VAO
         glBindVertexArray(0);
         glDeleteVertexArrays(vaoId);

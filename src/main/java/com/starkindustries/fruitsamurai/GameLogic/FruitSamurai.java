@@ -17,11 +17,12 @@ import com.starkindustries.fruitsamurai.Graphics.GameItem;
 import com.starkindustries.fruitsamurai.Graphics.Mesh;
 import com.starkindustries.fruitsamurai.Graphics.Texture;
 import com.starkindustries.fruitsamurai.Interfaces.IGameLogic;
+import com.starkindustries.fruitsamurai.Utils.AssimpOBJLoader;
 import com.starkindustries.fruitsamurai.Utils.FileUtils;
-import com.starkindustries.fruitsamurai.Utils.OBJLoader;
 
 import static org.lwjgl.glfw.GLFW.*;
 
+import java.io.File;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
@@ -40,12 +41,11 @@ public class FruitSamurai implements IGameLogic {
     private GameItem melon;
     private GameItem background;
     private GameItem sword;
-    private Mesh m_melon;
-    private Mesh m_background;
-    private Mesh m_sword;
+    private Mesh[] m_melon;
+    private Mesh[] m_background;
+    private Mesh[] m_sword;
     private static DynamicsWorld dynamicsWorld;
     private static Set<RigidBody> bodies = new HashSet<>();
-    private StringBuilder sb;
 
     public FruitSamurai() {
         renderer = new Renderer();
@@ -59,17 +59,10 @@ public class FruitSamurai implements IGameLogic {
     	ConstraintSolver solver = new SequentialImpulseConstraintSolver();
     	dynamicsWorld = new DiscreteDynamicsWorld(disp, broadphase, solver, collconf);
     	dynamicsWorld.setGravity(new javax.vecmath.Vector3f(0,-0.1f,0));*/
-        sb = new StringBuilder();
     	renderer.init(window);
-    	Texture background_t = new Texture(FileUtils.getTexturesFolder()+"background_def.jpg");
-    	Texture melon_t = new Texture(FileUtils.getTexturesFolder()+"melon_t.png");
-        Texture sword_t = new Texture(FileUtils.getTexturesFolder()+"sword.png");
-    	m_melon = OBJLoader.loadmesh(FileUtils.getMeshesFolder()+"melon.obj");
-        m_background = OBJLoader.loadmesh(FileUtils.getMeshesFolder()+"background.obj");
-        m_sword = OBJLoader.loadmesh(FileUtils.getMeshesFolder()+"sword.obj");
-    	m_background.setTexture(background_t);
-        m_sword.setTexture(sword_t);
-    	m_melon.setTexture(melon_t);
+    	m_melon = AssimpOBJLoader.load(FileUtils.getMeshesFolder()+"melon.obj");
+        m_background = AssimpOBJLoader.load(FileUtils.getMeshesFolder()+"background.obj");
+        m_sword = AssimpOBJLoader.load(FileUtils.getMeshesFolder()+"sword.obj");
     	melon = new GameItem(m_melon);
     	background = new GameItem(m_background);
         sword = new GameItem(m_sword);

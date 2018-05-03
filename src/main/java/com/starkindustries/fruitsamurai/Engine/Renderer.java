@@ -35,9 +35,6 @@ public class Renderer {
 		shaderProgram.createFragmentShader(FileUtils.loadAsString(FileUtils.getShadersFolder() + "\\bg_def.fs"));
 		shaderProgram.link();
 		projection_matrix = transformation.getProjectionMatrixOrtho(-16, 16, 16, -16, 0, 16);
-		//projection_matrix = new
-		//Matrix4f().perspective((float)Math.toRadians(60),(float)window.getWidth()/window.getHeight(),
-		// 0.01f, 1000.0f);
 		shaderProgram.createUniform("projection_matrix");
 		shaderProgram.createUniform("world_matrix");
 		shaderProgram.createUniform("texture_sampler");
@@ -73,7 +70,7 @@ public class Renderer {
 					);
 			shaderProgram.setUniformMat4f("world_matrix", worldMatrix);
 			shaderProgram.setUniform3f("color", mesh.getColor());
-			shaderProgram.setUniform1i("use_color", mesh.isTextured() ? 0 : 1);
+			shaderProgram.setUniform1i("use_color", mesh.hasMaterial() ? 0 : 1);
 			shaderProgram.setUniform4f("ambient_light", ambient_light);
 			// Render the mesh for this game item
 			mesh.render();

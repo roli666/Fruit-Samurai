@@ -9,6 +9,7 @@ import org.joml.Vector3f;
 
 import com.starkindustries.fruitsamurai.Graphics.Mesh;
 
+@Deprecated
 public class OBJLoader {
 	public static Mesh loadmesh(String file) throws Exception {
 
@@ -57,7 +58,7 @@ public class OBJLoader {
                     break;
             }
         }
-        Material mat = null;
+        Material mat = null;/*
         if(mtlFileName!=null) {
             lines = FileUtils.loadAsStringList(mtlFileName);
             for (String line : lines) {
@@ -92,7 +93,7 @@ public class OBJLoader {
                         break;
                 }
             }
-        }
+        }*/
         return reorderLists(vertices, textures, normals, faces, mat);
 	}
 

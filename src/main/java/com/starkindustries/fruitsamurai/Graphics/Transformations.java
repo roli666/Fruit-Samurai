@@ -1,6 +1,7 @@
 package com.starkindustries.fruitsamurai.Graphics;
 
 import org.joml.Matrix4f;
+import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 public class Transformations {
@@ -12,7 +13,7 @@ public class Transformations {
 		projectionMatrix = new Matrix4f();
 	}
 
-	public final Matrix4f getProjectionMatrix(float fov, float width, float height, float zNear, float zFar) {
+	public final Matrix4f getProjectionMatrixPersp(float fov, float width, float height, float zNear, float zFar) {
 		float aspectRatio = width / height;
 		projectionMatrix.identity();
 		projectionMatrix.perspective(fov, aspectRatio, zNear, zFar);
