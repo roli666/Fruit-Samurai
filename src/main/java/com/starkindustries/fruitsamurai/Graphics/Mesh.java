@@ -5,6 +5,7 @@ import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.starkindustries.fruitsamurai.Utils.ListUtils;
 import org.joml.Vector3f;
 import org.lwjgl.system.MemoryUtil;
 
@@ -71,6 +72,75 @@ public class Mesh {
             vboIdList.add(vboId);
             indicesBuffer = MemoryUtil.memAllocInt(indices.length);
             indicesBuffer.put(indices).flip();
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboId);
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, GL_STATIC_DRAW);
+
+            glBindBuffer(GL_ARRAY_BUFFER, 0);
+            glBindVertexArray(0);
+        } finally {
+            if (verticesBuffer != null) {
+                MemoryUtil.memFree(verticesBuffer);
+            }
+            if (indicesBuffer != null) {
+                MemoryUtil.memFree(indicesBuffer);
+            }
+            if (textureBuffer != null) {
+                MemoryUtil.memFree(textureBuffer);
+            }
+            if (normalsBuffer != null) {
+                MemoryUtil.memFree(normalsBuffer);
+            }
+        }
+    }
+
+    public Mesh(List<Float> positions, List<Integer> indices, List<Float> textcoords, List<Float> normals) {
+
+        FloatBuffer verticesBuffer = null;
+        FloatBuffer textureBuffer = null;
+        FloatBuffer normalsBuffer = null;
+        IntBuffer indicesBuffer = null;
+        try {
+            if (color == null)
+                color = DEFAULT_COLOR;
+
+            vertexCount = indices.size();
+            vboIdList = new ArrayList<>();
+
+            vaoId = glGenVertexArrays();
+            glBindVertexArray(vaoId);
+
+            // Position VBO
+            int vboId = glGenBuffers();
+            vboIdList.add(vboId);
+            verticesBuffer = MemoryUtil.memAllocFloat(positions.size());
+            verticesBuffer.put(ListUtils.listToFloatArray(positions)).flip();
+            glBindBuffer(GL_ARRAY_BUFFER, vboId);
+            glBufferData(GL_ARRAY_BUFFER, verticesBuffer, GL_STATIC_DRAW);
+            glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
+
+            // Texture coordinates VBO
+            vboId = glGenBuffers();
+            vboIdList.add(vboId);
+            textureBuffer = MemoryUtil.memAllocFloat(textcoords.size());
+            textureBuffer.put(ListUtils.listToFloatArray(textcoords)).flip();
+            glBindBuffer(GL_ARRAY_BUFFER, vboId);
+            glBufferData(GL_ARRAY_BUFFER, textureBuffer, GL_STATIC_DRAW);
+            glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
+
+            // Normals VBO
+            vboId = glGenBuffers();
+            vboIdList.add(vboId);
+            normalsBuffer = MemoryUtil.memAllocFloat(normals.size());
+            normalsBuffer.put(ListUtils.listToFloatArray(normals)).flip();
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboId);
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, normalsBuffer, GL_STATIC_DRAW);
+            glVertexAttribPointer(2, 3, GL_FLOAT, false, 0, 0);
+
+            // Index VBO
+            vboId = glGenBuffers();
+            vboIdList.add(vboId);
+            indicesBuffer = MemoryUtil.memAllocInt(indices.size());
+            indicesBuffer.put(ListUtils.listIntToArray(indices)).flip();
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboId);
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, GL_STATIC_DRAW);
 
@@ -175,6 +245,19 @@ public class Mesh {
         Texture texture = mat.getTexture();
         if (texture != null) {
             texture.cleanup();
+        }
+
+        // Delete the VAO
+        glBindVertexArray(0);
+        glDeleteVertexArrays(vaoId);
+    }
+    public void deleteBuffers() {
+        glDisableVertexAttribArray(0);
+
+        // Delete the VBOs
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        for (int vboId : vboIdList) {
+            glDeleteBuffers(vboId);
         }
 
         // Delete the VAO

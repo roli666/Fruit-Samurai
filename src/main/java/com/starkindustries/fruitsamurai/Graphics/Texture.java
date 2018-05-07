@@ -90,6 +90,9 @@ public class Texture {
         glBindTexture(GL_TEXTURE_2D, texture);
     }
 
+    public int getWidth(){return width;}
+    public int getHeight(){return height;}
+
     public void cleanup() {
         glDeleteTextures(texture);
     }

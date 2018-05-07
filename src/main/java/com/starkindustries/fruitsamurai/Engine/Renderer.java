@@ -79,6 +79,31 @@ public class Renderer {
 		shaderProgram.unbind();
 	}
 
+	private void renderCrossHair() {
+			glPushMatrix();
+			glLoadIdentity();
+
+			float inc = 0.05f;
+			glLineWidth(2.0f);
+
+			glBegin(GL_LINES);
+
+			glColor3f(1.0f, 1.0f, 1.0f);
+
+			// Horizontal line
+			glVertex3f(-inc, 0.0f, 0.0f);
+			glVertex3f(+inc, 0.0f, 0.0f);
+			glEnd();
+
+			// Vertical line
+			glBegin(GL_LINES);
+			glVertex3f(0.0f, -inc, 0.0f);
+			glVertex3f(0.0f, +inc, 0.0f);
+			glEnd();
+
+			glPopMatrix();
+	}
+
 	public void cleanup() {
 		if (shaderProgram != null) {
 			shaderProgram.cleanup();

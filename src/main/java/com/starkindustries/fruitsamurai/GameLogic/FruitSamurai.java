@@ -46,6 +46,7 @@ public class FruitSamurai implements IGameLogic {
     private Mesh[] m_sword;
     private static DynamicsWorld dynamicsWorld;
     private static Set<RigidBody> bodies = new HashSet<>();
+    private HUD hud;
 
     public FruitSamurai() {
         renderer = new Renderer();
@@ -74,7 +75,9 @@ public class FruitSamurai implements IGameLogic {
         items.add(background);
     	items.add(melon);
         items.add(sword);
-    	
+
+
+        hud = new HUD("DEMO");
     }
 
     @Override
@@ -145,6 +148,7 @@ public class FruitSamurai implements IGameLogic {
     @Override
     public void render(Window window) {
         window.setClearColor(color, color, color, 0.0f);
+        hud.updateSize(window);
         renderer.render(window,items);
     }
 
@@ -154,5 +158,6 @@ public class FruitSamurai implements IGameLogic {
         for (GameItem gameItem : items) {
             gameItem.getMesh().cleanUp();
         }
+        //hud.cleanup();
     }
 }
