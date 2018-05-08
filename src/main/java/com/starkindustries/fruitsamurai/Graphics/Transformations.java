@@ -6,11 +6,13 @@ import org.joml.Vector3f;
 
 public class Transformations {
 	private final Matrix4f projectionMatrix;
-	private final Matrix4f worldMatrix;
+	private final Matrix4f modelMatrix;
+	private final Matrix4f orthoModelMatrix;
 
 	public Transformations() {
-		worldMatrix = new Matrix4f();
+		modelMatrix = new Matrix4f();
 		projectionMatrix = new Matrix4f();
+		orthoModelMatrix = new Matrix4f();
 	}
 
 	public final Matrix4f getProjectionMatrixPersp(float fov, float width, float height, float zNear, float zFar) {
@@ -27,12 +29,23 @@ public class Transformations {
 	}
 
 	public Matrix4f getWorldMatrix(Vector3f offset, Vector3f rotation, float scale) {
-		worldMatrix.identity().translate(offset)
+		modelMatrix.identity().translate(offset)
 			.rotateX((float) Math.toRadians(rotation.x))
 			.rotateY((float) Math.toRadians(rotation.y))
 			.rotateZ((float) Math.toRadians(rotation.z))
 			.scale(scale);
-		return worldMatrix;
+		return modelMatrix;
+	}
+	public Matrix4f buildOrtoProjModelMatrix(GameItem gameItem, Matrix4f orthoMatrix) {
+		Vector3f rotation = gameItem.getRotation();
+		modelMatrix.identity().translate(gameItem.getPosition()).
+				rotateX((float) Math.toRadians(-rotation.x)).
+				rotateY((float) Math.toRadians(-rotation.y)).
+				rotateZ((float) Math.toRadians(-rotation.z)).
+				scale(gameItem.getScale());
+		orthoModelMatrix.set(orthoMatrix);
+		orthoModelMatrix.mul(modelMatrix);
+		return orthoModelMatrix;
 	}
 
 }

@@ -7,6 +7,7 @@ import org.joml.Vector4f;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.assimp.*;
 
+import java.io.File;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class AssimpOBJLoader {
         Texture texture = null;
         if (textPath != null && textPath.length() > 0) {
             TextureCache textCache = TextureCache.getInstance();
-            texture = textCache.getTexture(textPath);
+            texture = textCache.getTexture(FileUtils.getTexturesFolder()+textPath);
         }
         Vector4f ambient = Material.DEFAULT_COLOUR;
         int result = aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_AMBIENT, aiTextureType_NONE, 0, colour);

@@ -9,7 +9,6 @@ import org.joml.Vector3f;
 
 import com.starkindustries.fruitsamurai.Graphics.Mesh;
 
-@Deprecated
 public class OBJLoader {
 	public static Mesh loadmesh(String file) throws Exception {
 
@@ -58,42 +57,7 @@ public class OBJLoader {
                     break;
             }
         }
-        Material mat = null;/*
-        if(mtlFileName!=null) {
-            lines = FileUtils.loadAsStringList(mtlFileName);
-            for (String line : lines) {
-                String[] tokens = line.split("\\s+");
-                switch (tokens[0]) {
-                    case "newmtl":
-                        mat = new Material(tokens[1]);
-                        break;
-                    case "Ns":
-                        mat.setNs(Float.parseFloat(tokens[1]));
-                        break;
-                    case "Ka":
-                        mat.setKa(new Vector3f(Float.parseFloat(tokens[1]),Float.parseFloat(tokens[2]),Float.parseFloat(tokens[3])));
-                        break;
-                    case "Kd":
-                        mat.setKd(new Vector3f(Float.parseFloat(tokens[1]),Float.parseFloat(tokens[2]),Float.parseFloat(tokens[3])));
-                        break;
-                    case "Ks":
-                        mat.setKs(new Vector3f(Float.parseFloat(tokens[1]),Float.parseFloat(tokens[2]),Float.parseFloat(tokens[3])));
-                        break;
-                    case "Ke":
-                        mat.setKe(new Vector3f(Float.parseFloat(tokens[1]),Float.parseFloat(tokens[2]),Float.parseFloat(tokens[3])));
-                        break;
-                    case "Ni":
-                        mat.setNi(Float.parseFloat(tokens[1]));
-                        break;
-                    case "d":
-                        mat.setD(Float.parseFloat(tokens[1]));
-                        break;
-                    case "illum":
-                        mat.setIllum(Float.parseFloat(tokens[1]));
-                        break;
-                }
-            }
-        }*/
+        Material mat = null;
         return reorderLists(vertices, textures, normals, faces, mat);
 	}
 

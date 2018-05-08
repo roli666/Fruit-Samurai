@@ -277,11 +277,11 @@
 			<artifactId>jbullet</artifactId>
 			<version>20101010-1</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.l33tlabs.twl/pngdecoder -->
 		<dependency>
-			<groupId>org.lwjgl</groupId>
-			<artifactId>lwjgl-assimp</artifactId>
-			<version>${lwjgl.version}</version>
-			<scope>runtime</scope>
+			<groupId>org.l33tlabs.twl</groupId>
+			<artifactId>pngdecoder</artifactId>
+			<version>1.0</version>
 		</dependency>
 	</dependencies>
 </project>

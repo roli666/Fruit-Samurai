@@ -12,8 +12,8 @@ public class GameItem {
 	private Vector3f acceleration;
 	private Vector3f velocity;
 	public boolean affectedByPhysics = false;
-	public boolean menuItem = false;
 	public boolean visible = true;
+	public boolean menuItem = false;
 
 	public GameItem() {
 		position = new Vector3f(0, 0, 0);
@@ -27,6 +27,10 @@ public class GameItem {
 			mesh = meshes[0];
 		else
 			this.meshes = meshes;
+	}
+	public GameItem(Mesh mesh) {
+		this();
+		this.mesh=mesh;
 	}
 
 	public Vector3f getPosition()

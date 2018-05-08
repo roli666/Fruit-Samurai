@@ -1,75 +1,95 @@
 package com.starkindustries.fruitsamurai.Graphics;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.starkindustries.fruitsamurai.Utils.ListUtils;
 
 public class TextItem extends GameItem {
 
     private static final float ZPOS = 0.0f;
-    private static final int VERTICES_PER_QUAD = 4;
-    private String text;
-    private final int numCols;
-    private final int numRows;
 
-    public TextItem(String text, String fontFileName, int numCols, int numRows) throws Exception {
+    private static final int VERTICES_PER_QUAD = 4;
+
+    private final FontTexture fontTexture;
+
+    private String text;
+
+    public TextItem(String text, FontTexture fontTexture) throws Exception {
         super();
         this.text = text;
-        this.numCols = numCols;
-        this.numRows = numRows;
-        Texture texture = new Texture(fontFileName);
-        this.setMesh(buildMesh(texture, numCols, numRows));
+        this.fontTexture = fontTexture;
+        setMesh(buildMesh());
     }
 
-    private Mesh buildMesh(Texture texture, int numCols, int numRows) {
-        byte[] chars = text.getBytes(Charset.forName("ISO-8859-1"));
-        int numChars = chars.length;
+    private Mesh buildMesh() {
         List<Float> positions = new ArrayList();
         List<Float> textCoords = new ArrayList();
-        List<Float> normals = new ArrayList();;
-        List<Integer> indices = new ArrayList();
-        float tileWidth = (float) texture.getWidth() / (float) numCols;
-        float tileHeight = (float) texture.getHeight() / (float) numRows;
-        for (int i = 0; i < numChars; i++) {
-            byte currChar = chars[i];
-            int col = currChar % numCols;
-            int row = currChar / numCols;
+        float[] normals   = new float[0];
+        List<Integer> indices   = new ArrayList();
+        char[] characters = text.toCharArray();
+        int numChars = characters.length;
+
+        float startx = 0;
+        for(int i=0; i<numChars; i++) {
+            FontTexture.CharInfo charInfo = fontTexture.getCharInfo(characters[i]);
+
             // Build a character tile composed by two triangles
+
             // Left Top vertex
-            positions.add((float) i * tileWidth); // x
+            positions.add(startx); // x
             positions.add(0.0f); //y
             positions.add(ZPOS); //z
-            textCoords.add((float) col / (float) numCols);
-            textCoords.add((float) row / (float) numRows);
-            indices.add(i * VERTICES_PER_QUAD);
+            textCoords.add( (float)charInfo.getStartX() / (float)fontTexture.getWidth());
+            textCoords.add(0.0f);
+            indices.add(i*VERTICES_PER_QUAD);
+
             // Left Bottom vertex
-            positions.add((float) i * tileWidth); // x
-            positions.add(tileHeight); //y
+            positions.add(startx); // x
+            positions.add((float)fontTexture.getHeight()); //y
             positions.add(ZPOS); //z
-            textCoords.add((float) col / (float) numCols);
-            textCoords.add((float) (row + 1) / (float) numRows);
-            indices.add(i * VERTICES_PER_QUAD + 1);
+            textCoords.add((float)charInfo.getStartX() / (float)fontTexture.getWidth());
+            textCoords.add(1.0f);
+            indices.add(i*VERTICES_PER_QUAD + 1);
+
             // Right Bottom vertex
-            positions.add((float) i * tileWidth + tileWidth); // x
-            positions.add(tileHeight); //y
+            positions.add(startx + charInfo.getWidth()); // x
+            positions.add((float)fontTexture.getHeight()); //y
             positions.add(ZPOS); //z
-            textCoords.add((float) (col + 1) / (float) numCols);
-            textCoords.add((float) (row + 1) / (float) numRows);
-            indices.add(i * VERTICES_PER_QUAD + 2);
+            textCoords.add((float)(charInfo.getStartX() + charInfo.getWidth() )/ (float)fontTexture.getWidth());
+            textCoords.add(1.0f);
+            indices.add(i*VERTICES_PER_QUAD + 2);
+
             // Right Top vertex
-            positions.add((float) i * tileWidth + tileWidth); // x
+            positions.add(startx + charInfo.getWidth()); // x
             positions.add(0.0f); //y
             positions.add(ZPOS); //z
-            textCoords.add((float) (col + 1) / (float) numCols);
-            textCoords.add((float) row / (float) numRows);
-            indices.add(i * VERTICES_PER_QUAD + 3);
+            textCoords.add((float)(charInfo.getStartX() + charInfo.getWidth() )/ (float)fontTexture.getWidth());
+            textCoords.add(0.0f);
+            indices.add(i*VERTICES_PER_QUAD + 3);
+
             // Add indices por left top and bottom right vertices
-            indices.add(i * VERTICES_PER_QUAD);
-            indices.add(i * VERTICES_PER_QUAD + 2);
+            indices.add(i*VERTICES_PER_QUAD);
+            indices.add(i*VERTICES_PER_QUAD + 2);
+
+            startx += charInfo.getWidth();
         }
-        return new Mesh(positions, indices, textCoords, normals);
+
+        float[] posArr = ListUtils.listToFloatArray(positions);
+        float[] textCoordsArr = ListUtils.listToFloatArray(textCoords);
+        int[] indicesArr = ListUtils.listIntToArray(indices);
+        Mesh mesh = new Mesh(posArr, indicesArr, textCoordsArr, normals);
+        mesh.setMaterial(new Material(fontTexture.getTexture()));
+        return mesh;
     }
+
     public String getText() {
         return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+        this.getMesh().deleteBuffers();
+        this.setMesh(buildMesh());
     }
 }

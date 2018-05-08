@@ -18,4 +18,12 @@ public class Enums {
     {
         DEFAULT,SAMURAI
     }
+    public enum Fruit
+    {
+        Melon,Banana,Apple
+    }
+    public enum Sword
+    {
+        Glow
+    }
 }
