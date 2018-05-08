@@ -4,6 +4,7 @@ import static org.lwjgl.opengl.GL11.*;
 //import static org.lwjgl.opengl.GL20.*;
 //import static org.lwjgl.opengl.GL30.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.starkindustries.fruitsamurai.Interfaces.IHud;
@@ -73,6 +74,7 @@ public class Renderer {
             glViewport(0, 0, window.getWidth(), window.getHeight());
             window.setResized(false);
         }
+
         renderHud(window, hud);
         renderWorld(window, items);
     }
@@ -83,7 +85,14 @@ public class Renderer {
         shaderProgram.setUniformMat4f("projection_matrix", projection_matrix);
         for (GameItem gameItem : items) {
             if (gameItem.visible) {
-                Mesh mesh = gameItem.getMesh();
+                List <Mesh> meshes = new ArrayList<>();
+                if(gameItem.getMeshes() != null)
+                    for(Mesh messy : gameItem.getMeshes())
+                        meshes.add(messy);
+                if(gameItem.getMesh() !=  null)
+                    meshes.add(gameItem.getMesh());
+                for(Mesh moremessy : meshes)
+                {
                 // Set world matrix for this item
                 Matrix4f worldMatrix = transformation.getWorldMatrix(
                         gameItem.getPosition(),
@@ -91,11 +100,12 @@ public class Renderer {
                         gameItem.getScale()
                 );
                 shaderProgram.setUniformMat4f("world_matrix", worldMatrix);
-                shaderProgram.setUniform3f("color", mesh.getColor());
-                shaderProgram.setUniform1i("use_color", mesh.hasMaterial() ? 0 : 1);
+                shaderProgram.setUniform3f("color", moremessy.getColor());
+                shaderProgram.setUniform1i("use_color", moremessy.hasMaterial() ? 0 : 1);
                 shaderProgram.setUniform4f("ambient_light", ambient_light);
                 // Render the mesh for this game item
-                mesh.render();
+                    moremessy.render();
+                }
             }
         }
         shaderProgram.unbind();
@@ -119,31 +129,6 @@ public class Renderer {
         }
 
         hudShaderProgram.unbind();
-    }
-
-    private void renderCrossHair() {
-        glPushMatrix();
-        glLoadIdentity();
-
-        float inc = 0.05f;
-        glLineWidth(2.0f);
-
-        glBegin(GL_LINES);
-
-        glColor3f(1.0f, 1.0f, 1.0f);
-
-        // Horizontal line
-        glVertex3f(-inc, 0.0f, 0.0f);
-        glVertex3f(+inc, 0.0f, 0.0f);
-        glEnd();
-
-        // Vertical line
-        glBegin(GL_LINES);
-        glVertex3f(0.0f, -inc, 0.0f);
-        glVertex3f(0.0f, +inc, 0.0f);
-        glEnd();
-
-        glPopMatrix();
     }
 
     public void cleanup() {

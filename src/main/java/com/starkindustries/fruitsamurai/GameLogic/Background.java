@@ -10,13 +10,11 @@ import org.joml.Vector3f;
 
 
 public class Background extends GameItem {
-    Mesh mesh;
-    Texture t_background;
-    GameItem gameItem;
 
     Background(Enums.Background background) throws Exception{
         Mesh mesh = OBJLoader.loadmesh(FileUtils.getMeshesFolder()+"background.obj");
-        menuItem = true;
+        Texture t_background = new Texture(FileUtils.getTexturesFolder()+"background_def.jpg");
+        menuItem = false;
         switch (background)
         {
             case DEFAULT:
@@ -28,19 +26,18 @@ public class Background extends GameItem {
         }
         mesh.setMaterial(new Material());
         mesh.getMaterial().setTexture(t_background);
-        gameItem = new GameItem(mesh);
+        setMesh(mesh);
     }
 
     public void setBackground(Enums.Background background) throws  Exception{
         switch (background)
         {
             case DEFAULT:
-                t_background = new Texture(FileUtils.getTexturesFolder()+"background_def.jpg");
+                getMesh().getMaterial().setTexture(new Texture(FileUtils.getTexturesFolder()+"background_def.jpg"));
                 break;
             case SAMURAI:
-                t_background = new Texture(FileUtils.getTexturesFolder()+"background_2.jpg");
+                getMesh().getMaterial().setTexture(new Texture(FileUtils.getTexturesFolder()+"background_2.jpg"));
                 break;
         }
-        mesh.getMaterial().setTexture(t_background);
     }
 }

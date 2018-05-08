@@ -1,6 +1,7 @@
 package com.starkindustries.fruitsamurai;
 
 import com.starkindustries.fruitsamurai.Engine.GameEngine;
+import com.starkindustries.fruitsamurai.Engine.Window;
 import com.starkindustries.fruitsamurai.GameLogic.FruitSamurai;
 import com.starkindustries.fruitsamurai.Interfaces.IGameLogic;
 
@@ -9,7 +10,10 @@ public class Main {
         try {
             boolean vsync = true;
             IGameLogic gameLogic = new FruitSamurai();
-            GameEngine gameEng = new GameEngine("Fruit Samurai", 800, 600, vsync, gameLogic);
+            Window.WindowOptions opts = new Window.WindowOptions();
+            opts.showFps = true;
+            opts.compatibleProfile = true;
+            GameEngine gameEng = new GameEngine("Fruit Samurai", 800, 600, vsync, opts, gameLogic);
             gameEng.start();
         } catch (Exception e) {
             e.printStackTrace();

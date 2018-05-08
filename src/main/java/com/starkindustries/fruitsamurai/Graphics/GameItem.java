@@ -9,16 +9,18 @@ public class GameItem {
 	private Vector3f rotation;
 	private Mesh[] meshes;
 	private float scale;
-	private Vector3f acceleration;
-	private Vector3f velocity;
 	public boolean affectedByPhysics = false;
 	public boolean visible = true;
 	public boolean menuItem = false;
+	private Vector3f acceleration;
+	private Vector3f velocity;
 
 	public GameItem() {
-		position = new Vector3f(0, 0, 0);
+		position = new Vector3f();
+		rotation = new Vector3f();
+		acceleration = new Vector3f();
+		velocity = new Vector3f();
 		scale = 1;
-		rotation = new Vector3f(0, 0, 0);
 	}
 
 	public GameItem(Mesh[] meshes) {
@@ -65,22 +67,6 @@ public class GameItem {
 	{
 		return rotation;
 	}
-	public Vector3f getVelocity()
-	{
-		return velocity;
-	}
-	public void setVelocity(Vector3f v)
-	{
-		velocity=v;
-	}
-	public Vector3f getAcceleration()
-	{
-		return acceleration;
-	}
-	public void setAcceleration(Vector3f v)
-	{
-		acceleration=v;
-	}
 
 	public void setRotation(float x, float y, float z)
 	{
@@ -93,8 +79,43 @@ public class GameItem {
 	{
 		return mesh;
 	}
+	public Mesh [] getMeshes()
+	{
+		return meshes;
+	}
 
 	public void setMesh(Mesh mesh) {
 		this.mesh = mesh;
+	}
+	public void setMesh(Mesh[] mesh) {
+		this.meshes = mesh;
+	}
+	public Vector3f getVelocity()
+	{
+		return velocity;
+	}
+	public void setVelocity(Vector3f v)
+	{
+		velocity=v;
+	}
+	public void setVelocity(float x,float y,float z)
+	{
+		velocity.x=x;
+		velocity.x=y;
+		velocity.x=z;
+	}
+	public Vector3f getAcceleration()
+	{
+		return acceleration;
+	}
+	public void setAcceleration(Vector3f v)
+	{
+		acceleration=v;
+	}
+	public void setAcceleration(float x,float y,float z)
+	{
+		acceleration.x=x;
+		acceleration.x=y;
+		acceleration.x=z;
 	}
 }

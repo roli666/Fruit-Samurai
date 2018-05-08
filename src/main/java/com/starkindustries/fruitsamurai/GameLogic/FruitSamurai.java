@@ -9,6 +9,7 @@ import com.starkindustries.fruitsamurai.Interfaces.IGameLogic;
 
 import static org.lwjgl.glfw.GLFW.*;
 
+import java.lang.Math;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -47,43 +48,44 @@ public class FruitSamurai implements IGameLogic {
         hud = new HUD("DEMO");
         sword = new Sword(Enums.Sword.Glow);
 
-        fruit.gameItem.menuItem = true;
-        fruit.gameItem.setPosition(-5,0,0);
-        fruit.gameItem.setScale(2);
-        sword.gameItem.setScale(2);
+        fruit.menuItem = true;
+        fruit.setPosition(-5,0,0);
+        fruit.setScale(2);
+        sword.setScale(2);
 
-        items.add(fruit.gameItem);
-        items.add(background.gameItem);
-        items.add(sword.gameItem);
+        items.add(fruit);
+        items.add(background);
+        items.add(sword);
     }
 
     @Override
     public void input(Window window) {
         if(window.isMouseKeyPressed(GLFW_MOUSE_BUTTON_1)){
             sword.slashing = true;
-            sword.gameItem.visible = true;
+            sword.visible = true;
             window.hideMouse();
-            sword.gameItem.setPosition((float) window.getMouseX()/window.getWidth()*2*16-16, (float) window.getMouseY()/window.getHeight()*2*16-16,sword.getPosition().z);
+            sword.setPosition((float) window.getMouseX()/window.getWidth()*2*16-16, (float) window.getMouseY()/window.getHeight()*2*16-16,sword.getPosition().z);
             System.out.println(String.format("Slashing at X:%.2f Y:%.2f",window.getMouseX()/window.getWidth()*2*16-16,window.getMouseY()/window.getHeight()*2*16-16));
         }
         if(window.isMouseKeyReleased(GLFW_MOUSE_BUTTON_1) && sword.slashing == true)
         {
             sword.slashing = false;
-            sword.gameItem.visible = false;
+            sword.visible = false;
             window.showMouse();
             System.out.println("Stopped Slashing");
         }
         if ( window.isKeyPressed(GLFW_KEY_SPACE) ) {
-            GameItem fruit = null;
             try {
-                fruit = new Fruit(Enums.Fruit.Melon).gameItem;
+                double accelerationY = -1.8 + Math.random() * (-1.5 - (-1.8));
+                double accelerationX = -1 + Math.random() * (1 - (-1));
+                Fruit new_fruit = new Fruit(Enums.Fruit.Melon);
+                new_fruit.setPosition(0, 16, 0);
+                new_fruit.affectedByPhysics = true;
+                new_fruit.setAcceleration(new Vector3f((float)accelerationX,(float)accelerationY,0));
+                items.add(new_fruit);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            fruit.setPosition(0, 10, 0);
-            fruit.affectedByPhysics = true;
-            fruit.setAcceleration(new Vector3f(0f,-0.5f,0));
-           	items.add(fruit);
         }
         if ( window.isKeyPressed(GLFW_KEY_DOWN) ) {
             Vector4f asd = renderer.getAmbient_light().add(-0.01f,-0.01f,-0.01f,0);
@@ -113,12 +115,21 @@ public class FruitSamurai implements IGameLogic {
         	}
             if(item.affectedByPhysics)
             {
-            	item.setPosition(item.getPosition().add(item.getAcceleration()));
-            	if(item.getAcceleration().y<=item.getAcceleration().y%1)
-            		item.setAcceleration(new Vector3f(0,item.getAcceleration().y+0.01f,0));
+                Vector3f pos = item.getPosition();
+                Vector3f acc = item.getAcceleration();
+                float gravity = 0.05f;
+                acc = new Vector3f(acc.x,acc.y+gravity,acc.z);
+                item.setAcceleration(acc);
+
+            	if(pos.x+item.getScale()>=16 || pos.x-item.getScale()<=-16)
+            	    item.setAcceleration(-acc.x,acc.y,acc.z);
+
+                item.setPosition(pos.add(acc));
+
             	float rotation = item.getRotation().x + 5f;
-            	if ( rotation > 360 ) {
-            	rotation = 0;
+            	if ( rotation > 360 )
+            	{
+            	    rotation = 0;
             	}
             	item.setRotation(rotation, rotation, rotation);
             }
@@ -135,9 +146,7 @@ public class FruitSamurai implements IGameLogic {
     @Override
     public void cleanup() {
         renderer.cleanup();
-        for (GameItem gameItem : items) {
-            gameItem.getMesh().cleanUp();
-        }
-        //hud.cleanup();
+        items.parallelStream().filter(f->f.getMesh()!=null).forEach(a->a.getMesh().cleanUp());
+        hud.cleanup();
     }
 }

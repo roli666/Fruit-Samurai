@@ -2,36 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="119029c6-b50d-4e0a-a6d3-d7ff51e23092" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Background.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/FontTexture.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/hud.fs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/shaders/hud.vs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Engine/GameEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Engine/GameEngine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Engine/Renderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Engine/Renderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Enums.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Enums.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Engine/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Engine/Window.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Background.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Background.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Fruit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Fruit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/FruitSamurai.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/FruitSamurai.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/HUD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/HUD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Sword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Sword.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/GameItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/GameItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/TextItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/TextItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/Texture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/Texture.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/Transformations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/Transformations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Utils/AssimpOBJLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Utils/AssimpOBJLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Utils/OBJLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Utils/OBJLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/meshes/background.mtl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/meshes/melon.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/meshes/melon.mtl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/meshes/sword.mtl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/meshes/sword.obj" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/meshes/sword.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/starkindustries/fruitsamurai/Engine/GameEngine.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/starkindustries/fruitsamurai/Engine/GameEngine.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/starkindustries/fruitsamurai/Engine/Renderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/starkindustries/fruitsamurai/Engine/Renderer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/starkindustries/fruitsamurai/GameLogic/Enums.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/starkindustries/fruitsamurai/GameLogic/Enums.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/starkindustries/fruitsamurai/Engine/Window.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/starkindustries/fruitsamurai/Engine/Window.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/starkindustries/fruitsamurai/GameLogic/FruitSamurai.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/starkindustries/fruitsamurai/GameLogic/FruitSamurai.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/starkindustries/fruitsamurai/Graphics/Texture.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/starkindustries/fruitsamurai/Graphics/Texture.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/starkindustries/fruitsamurai/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/starkindustries/fruitsamurai/Main.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,91 +28,71 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="FruitSamurai.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FruitSamurai.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/FruitSamurai.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="74" column="9" selection-start-line="74" selection-start-column="9" selection-end-line="74" selection-end-column="9" />
+            <state relative-caret-position="209">
+              <caret line="112" column="17" lean-forward="true" selection-start-line="112" selection-start-column="17" selection-end-line="112" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Window.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Engine/Window.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1853">
+              <caret line="117" column="10" selection-start-line="117" selection-start-column="10" selection-end-line="117" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Background.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Background.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="12" selection-start-line="12" selection-end-line="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameEngine.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Engine/GameEngine.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="30" column="31" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameItem.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/GameItem.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="227">
+              <caret line="114" column="24" selection-start-line="114" selection-start-column="24" selection-end-line="114" selection-end-column="24" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2030#2031#0" expanded="true" />
-                <element signature="e#2071#2072#0" expanded="true" />
+                <element signature="e#799#800#0" expanded="true" />
+                <element signature="e#821#822#0" expanded="true" />
+                <element signature="e#1089#1090#0" expanded="true" />
+                <element signature="e#1108#1109#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
+      <file leaf-file-name="Shader.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/Shader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="20" lean-forward="true" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+            <state relative-caret-position="1887">
+              <caret line="140" column="52" selection-start-line="140" selection-start-column="52" selection-end-line="140" selection-end-column="52" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Main.java">
+      <file leaf-file-name="Mesh.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/Mesh.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HUD.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/HUD.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
-              <folding>
-                <element signature="e#1517#1518#0" expanded="true" />
-                <element signature="e#1572#1573#0" expanded="true" />
-                <element signature="e#1735#1736#0" expanded="true" />
-                <element signature="e#1767#1768#0" expanded="true" />
-                <element signature="e#1812#1813#0" expanded="true" />
-                <element signature="e#1893#1894#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Renderer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Engine/Renderer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-234">
-              <caret line="44" column="32" selection-start-line="44" selection-start-column="32" selection-end-line="44" selection-end-column="32" />
-              <folding>
-                <element signature="e#4991#4992#0" expanded="true" />
-                <element signature="e#5027#5028#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="hud.vs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/shaders/hud.vs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="37" selection-start-line="3" selection-start-column="37" selection-end-line="3" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="hud.fs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/shaders/hud.fs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Transformations.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/Transformations.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="46" column="42" selection-start-line="46" selection-start-column="42" selection-end-line="46" selection-end-column="42" />
+            <state relative-caret-position="3468">
+              <caret line="231" column="8" selection-start-line="231" selection-start-column="8" selection-end-line="231" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -155,7 +120,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Utils/FileUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Engine/Window.java" />
         <option value="$PROJECT_DIR$/src/main/resources/shaders/bg_def.fs" />
         <option value="$PROJECT_DIR$/src/main/resources/meshes/background.obj" />
         <option value="$PROJECT_DIR$/src/main/resources/meshes/background.mtl" />
@@ -168,9 +132,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Utils/OBJLoader.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/Mesh.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Enums.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Fruit.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Background.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/GameItem.java" />
         <option value="$PROJECT_DIR$/src/main/resources/meshes/sword.obj" />
         <option value="$PROJECT_DIR$/src/main/resources/meshes/melon.mtl" />
         <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Utils/AssimpOBJLoader.java" />
@@ -178,13 +139,19 @@
         <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/HUD.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/FontTexture.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/Texture.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Sword.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/Transformations.java" />
         <option value="$PROJECT_DIR$/src/main/resources/shaders/hud.fs" />
-        <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Engine/Renderer.java" />
         <option value="$PROJECT_DIR$/src/main/resources/shaders/hud.vs" />
-        <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/FruitSamurai.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Engine/Renderer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Sword.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Fruit.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Background.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Engine/Window.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Engine/GameEngine.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/GameItem.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/FruitSamurai.java" />
       </list>
     </option>
   </component>
@@ -198,10 +165,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="10" />
-    <option name="y" value="20" />
-    <option name="width" value="1346" />
-    <option name="height" value="688" />
+    <option name="x" value="566" />
+    <option name="y" value="-17" />
+    <option name="width" value="1179" />
+    <option name="height" value="846" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -212,7 +179,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -239,76 +205,11 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="FruitSamurai" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fruitsamurai-code" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fruitsamurai" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FruitSamurai" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fruitsamurai-code" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fruitsamurai" type="462c0819:PsiDirectoryNode" />
-              <item name="Engine" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FruitSamurai" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fruitsamurai-code" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fruitsamurai" type="462c0819:PsiDirectoryNode" />
-              <item name="GameLogic" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FruitSamurai" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fruitsamurai-code" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fruitsamurai" type="462c0819:PsiDirectoryNode" />
-              <item name="Graphics" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FruitSamurai" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fruitsamurai-code" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FruitSamurai" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fruitsamurai-code" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="meshes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FruitSamurai" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fruitsamurai-code" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="shaders" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FruitSamurai" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fruitsamurai-code" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="textures" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -405,54 +306,34 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32857144" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32943678" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32857144" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.26031747" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24304539" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="UI Designer" order="2" />
-      <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info id="Designer" order="2" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18020834" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32943678" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info id="UI Designer" order="2" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32943678" />
-      <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3995749" />
-      <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32943678" />
-      <window_info anchor="right" id="Maven Projects" order="3" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="2" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18020834" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3994528" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32943678" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Palette" order="3" />
@@ -488,7 +369,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="28" />
+      <option name="time" value="34" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -524,13 +405,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
           <caret line="4551" column="23" selection-start-line="4551" selection-start-column="23" selection-end-line="4551" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Engine/Window.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="74" column="61" lean-forward="true" selection-start-line="74" selection-start-column="61" selection-end-line="74" selection-end-column="61" />
         </state>
       </provider>
     </entry>
@@ -621,13 +495,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/meshes/sword.mtl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="29" lean-forward="true" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/meshes/sword.mtl" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/meshes/background.obj">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -639,10 +507,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1418">
           <caret line="63" column="49" lean-forward="true" selection-start-line="63" selection-start-column="49" selection-end-line="63" selection-end-column="49" />
-          <folding>
-            <element signature="e#5651#5652#0" expanded="true" />
-            <element signature="e#5676#5677#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -667,33 +531,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Fruit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="30" column="25" lean-forward="true" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Background.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/meshes/background.mtl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" selection-start-line="9" selection-end-line="9" selection-end-column="93" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/meshes/background.mtl" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/meshes/melon.mtl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -712,23 +550,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="816">
           <caret line="48" column="44" selection-start-line="48" selection-start-column="44" selection-end-line="48" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/GameItem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/Mesh.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="86" />
         </state>
       </provider>
     </entry>
@@ -736,86 +557,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1081">
           <caret line="76" selection-start-line="76" selection-end-line="76" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3221#3222#0" expanded="true" />
-            <element signature="e#3248#3249#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/FontTexture.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1010">
-          <caret line="22" column="53" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#567#568#0" expanded="true" />
-            <element signature="e#595#596#0" expanded="true" />
-            <element signature="e#625#626#0" expanded="true" />
-            <element signature="e#654#655#0" expanded="true" />
-            <element signature="e#689#690#0" expanded="true" />
-            <element signature="e#719#720#0" expanded="true" />
-            <element signature="e#762#763#0" expanded="true" />
-            <element signature="e#799#800#0" expanded="true" />
-            <element signature="e#3083#3084#0" expanded="true" />
-            <element signature="e#3120#3121#0" expanded="true" />
-            <element signature="e#3153#3154#0" expanded="true" />
-            <element signature="e#3189#3190#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/FontTexture.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/Texture.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-806">
           <caret line="57" column="40" selection-start-line="57" selection-start-column="40" selection-end-line="57" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Sword.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="16" column="43" selection-start-line="16" selection-start-column="43" selection-end-line="16" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/HUD.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
-          <folding>
-            <element signature="e#1517#1518#0" expanded="true" />
-            <element signature="e#1572#1573#0" expanded="true" />
-            <element signature="e#1735#1736#0" expanded="true" />
-            <element signature="e#1767#1768#0" expanded="true" />
-            <element signature="e#1812#1813#0" expanded="true" />
-            <element signature="e#1893#1894#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/Transformations.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="46" column="42" selection-start-line="46" selection-start-column="42" selection-end-line="46" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Engine/GameEngine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-          <folding>
-            <element signature="e#994#995#0" expanded="true" />
-            <element signature="e#1023#1024#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -826,64 +575,119 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/shaders/bg_def.vs">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/shaders/hud.fs" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/shaders/hud.vs" />
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/Transformations.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Sword.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="57" selection-start-line="5" selection-start-column="57" selection-end-line="5" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/HUD.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="27" column="59" lean-forward="true" selection-start-line="27" selection-start-column="59" selection-end-line="27" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Fruit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/Shader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="117" selection-start-line="117" selection-end-line="117" />
+        <state relative-caret-position="1887">
+          <caret line="140" column="52" selection-start-line="140" selection-start-column="52" selection-end-line="140" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/Mesh.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3468">
+          <caret line="231" column="8" selection-start-line="231" selection-start-column="8" selection-end-line="231" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hs_err_pid9696.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="38" column="50" lean-forward="true" selection-start-line="38" selection-start-column="50" selection-end-line="38" selection-end-column="50" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Engine/Renderer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-234">
-          <caret line="44" column="32" selection-start-line="44" selection-start-column="32" selection-end-line="44" selection-end-column="32" />
-          <folding>
-            <element signature="e#4991#4992#0" expanded="true" />
-            <element signature="e#5027#5028#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="262">
+          <caret line="89" column="32" lean-forward="true" selection-start-line="89" selection-start-column="32" selection-end-line="89" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/shaders/hud.fs">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/Background.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/shaders/hud.vs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="37" selection-start-line="3" selection-start-column="37" selection-end-line="3" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/FruitSamurai.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="74" column="9" selection-start-line="74" selection-start-column="9" selection-end-line="74" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2030#2031#0" expanded="true" />
-            <element signature="e#2071#2072#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="102">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+        <state relative-caret-position="340">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Engine/Window.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="20" lean-forward="true" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+        <state relative-caret-position="1853">
+          <caret line="117" column="10" selection-start-line="117" selection-start-column="10" selection-end-line="117" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Graphics/GameItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="114" column="24" selection-start-line="114" selection-start-column="24" selection-end-line="114" selection-end-column="24" />
+          <folding>
+            <element signature="e#799#800#0" expanded="true" />
+            <element signature="e#821#822#0" expanded="true" />
+            <element signature="e#1089#1090#0" expanded="true" />
+            <element signature="e#1108#1109#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/Engine/GameEngine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="30" column="31" selection-start-line="30" selection-start-column="31" selection-end-line="30" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/starkindustries/fruitsamurai/GameLogic/FruitSamurai.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="112" column="17" lean-forward="true" selection-start-line="112" selection-start-column="17" selection-end-line="112" selection-end-column="17" />
         </state>
       </provider>
     </entry>

@@ -11,11 +11,13 @@ public class GameEngine implements Runnable {
     public static final int TARGET_FPS = 75;
     public static final int TARGET_UPS = 30;
     private final Timer timer;
+    private double lastFps;
+    private int fps;
 
-    public GameEngine(String windowTitle,int width,int height,boolean vSync,IGameLogic gameLogic) throws Exception
+    public GameEngine(String windowTitle,int width,int height,boolean vSync,Window.WindowOptions opts,IGameLogic gameLogic) throws Exception
     {
         game = new Thread(this, "GAME_LOOP_THREAD");
-        window = new Window(windowTitle, width, height, vSync);
+        window = new Window(windowTitle, width, height, vSync, opts);
         this.gameLogic = gameLogic;
         timer = new Timer();
     }
@@ -51,6 +53,8 @@ public class GameEngine implements Runnable {
         window.init();
         timer.init();
         gameLogic.init(window);
+        lastFps = timer.getTime();
+        fps = 0;
     }
 
     protected void input() {
@@ -62,6 +66,12 @@ public class GameEngine implements Runnable {
     }
 
     protected void render() {
+        if ( window.getOptions().showFps && timer.getLastLoopTime() - lastFps > 1 ) {
+            lastFps = timer.getLastLoopTime();
+            window.setWindowTitle(window.getWindowTitle() + " - " + fps + " FPS");
+            fps = 0;
+        }
+        fps++;
         gameLogic.render(window);
         window.update();
     }

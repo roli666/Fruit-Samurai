@@ -4,11 +4,10 @@ import com.starkindustries.fruitsamurai.Graphics.GameItem;
 import com.starkindustries.fruitsamurai.Graphics.Mesh;
 import com.starkindustries.fruitsamurai.Utils.AssimpOBJLoader;
 import com.starkindustries.fruitsamurai.Utils.FileUtils;
+import org.joml.Vector3f;
 
 public class Fruit extends GameItem {
     private Enums.Fruit fruitType;
-    Mesh [] mesh;
-    GameItem gameItem;
 
     Fruit(Enums.Fruit ft) throws Exception{
         super();
@@ -16,6 +15,7 @@ public class Fruit extends GameItem {
         super.menuItem = false;
         setScale(2);
         Mesh [] mesh = new Mesh[]{};
+
         switch (ft)
         {
             case Apple:
@@ -28,7 +28,6 @@ public class Fruit extends GameItem {
                 mesh = AssimpOBJLoader.load(FileUtils.getMeshesFolder()+"melon.obj");
                 break;
         }
-        this.mesh = mesh;
-        gameItem = new GameItem(mesh);
+        setMesh(mesh);
     }
 }

@@ -4,6 +4,7 @@ import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GLUtil;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -14,25 +15,26 @@ public class Window {
 
     private int width;
     private int height;
-    private int xpos;
-    private int ypos;
     private boolean vsync;
     private boolean resized = false;
-    private final String windowtitle;
+    private String windowtitle;
     @SuppressWarnings("unused")
     private GLFWCursorPosCallback posCallback;
+    private final WindowOptions opts;
     private double mouseX;
     private double mouseY;
     private boolean fullscreen;
     public  boolean[] keys = new boolean[65536];
 
-    public Window(String title, int width, int height, boolean vSync) {
+
+    public Window(String title, int width, int height, boolean vSync,WindowOptions opts) {
         this.windowtitle = title;
         this.width = width;
         this.height = height;
         this.vsync = vSync;
         this.resized = false;
         this.fullscreen = false;
+        this.opts = opts;
     }
 
     public void init() {
@@ -50,8 +52,14 @@ public class Window {
         glfwWindowHint(GLFW_RESIZABLE, GL_TRUE); // the window will be resizable
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+        glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+        if (opts.compatibleProfile) {
+            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
+        } else {
+            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+            glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+        }
 
         // Create the window
         windowID = glfwCreateWindow(width, height, windowtitle, NULL, NULL);
@@ -107,10 +115,15 @@ public class Window {
         glfwShowWindow(windowID);
 
         GL.createCapabilities();
-
-        // Set the clear color
+        //GLUtil.setupDebugMessageCallback();
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         glEnable(GL_DEPTH_TEST);
+        glEnable(GL_STENCIL_TEST);
+        if (opts.showTriangles) {
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        }
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     }
 
     public void setClearColor(float r, float g, float b, float alpha) {
@@ -181,5 +194,22 @@ public class Window {
 
     public void showMouse() {
         glfwSetInputMode(windowID, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+    }
+
+    public WindowOptions getOptions() {
+        return opts;
+    }
+    public void setWindowTitle(String title) {
+        glfwSetWindowTitle(windowID, title);
+    }
+    public String getWindowTitle() {
+        return windowtitle;
+    }
+
+
+    public static class WindowOptions {
+        public boolean showTriangles;
+        public boolean showFps;
+        public boolean compatibleProfile;
     }
 }
