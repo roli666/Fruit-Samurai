@@ -30,6 +30,7 @@ public class FruitSamurai implements IGameLogic {
     private Background background;
     private Sword sword;
     private Player player;
+    private float dt;
 
     public FruitSamurai() {
         renderer = new Renderer();
@@ -74,7 +75,11 @@ public class FruitSamurai implements IGameLogic {
             sword.slashing = true;
             sword.visible = true;
             window.hideMouse();
-            sword.setPosition((float) window.getMouseX()/window.getWidth()*2*16-16, (float) window.getMouseY()/window.getHeight()*2*16-16,sword.getPosition().z);
+            Vector3f newPosition = new Vector3f((float) window.getMouseX()/window.getWidth()*2*16-16, (float) window.getMouseY()/window.getHeight()*2*16-16,sword.getPosition().z);
+            sword.setPosition(newPosition);
+            float velocity = (newPosition.sub(sword.previousPos).length()*dt);
+            sword.previousPos = newPosition;
+            System.out.println(velocity);
             System.out.println(String.format("Slashing at X:%.2f Y:%.2f",window.getMouseX()/window.getWidth()*2*16-16,window.getMouseY()/window.getHeight()*2*16-16));
         }
         if(window.isMouseKeyReleased(GLFW_MOUSE_BUTTON_1) && sword.slashing == true)
@@ -110,6 +115,7 @@ public class FruitSamurai implements IGameLogic {
 
     @Override
     public void update(float interval,Window window) {
+        this.dt = interval;
         color += direction * 0.01f;
         if (color > 1) {
             color = 1.0f;
