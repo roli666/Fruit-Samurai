@@ -151,6 +151,11 @@ public class Window {
         return glfwWindowShouldClose(windowID);
     }
 
+    public void closeWindow()
+    {
+        glfwSetWindowShouldClose(windowID, true);
+    }
+
     public int getWidth() {
         return width;
     }

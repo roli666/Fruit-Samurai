@@ -5,25 +5,35 @@
  */
 package com.starkindustries.fruitsamurai.GameLogic;
 
+import java.util.Random;
+
 /**
  *
  * @author Raóland
  */
 public class Enums {
-    public enum Mode 
-    {
-        ARCADE,CLASSIC
-    }
     public enum Background
     {
         DEFAULT,SAMURAI
     }
     public enum Fruit
     {
-        Melon,Banana,Apple
+        Melon,Orange,Apple
     }
     public enum Sword
     {
         Glow
+    }
+    static class RandomEnum<E extends Enum<Fruit>> {
+        Random RND = new Random();
+        E[] values;
+
+        public RandomEnum(Class<E> token) {
+            values = token.getEnumConstants();
+        }
+
+        public E random() {
+            return values[RND.nextInt(values.length)];
+        }
     }
 }

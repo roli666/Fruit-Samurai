@@ -62,7 +62,7 @@ public class GameEngine implements Runnable {
     }
 
     protected void update(float interval) {
-        gameLogic.update(interval);
+        gameLogic.update(interval,window);
     }
 
     protected void render() {

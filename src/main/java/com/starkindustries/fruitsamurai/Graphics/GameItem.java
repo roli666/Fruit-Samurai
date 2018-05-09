@@ -14,12 +14,21 @@ public class GameItem {
 	public boolean menuItem = false;
 	private Vector3f acceleration;
 	private Vector3f velocity;
+	private boolean toDelete;
+	private boolean startsGame;
+	private boolean showsLeaderboards;
+
+	private boolean exitsGame;
 
 	public GameItem() {
 		position = new Vector3f();
 		rotation = new Vector3f();
 		acceleration = new Vector3f();
 		velocity = new Vector3f();
+		toDelete = false;
+		startsGame = false;
+		showsLeaderboards = false;
+		exitsGame = false;
 		scale = 1;
 	}
 
@@ -101,8 +110,8 @@ public class GameItem {
 	public void setVelocity(float x,float y,float z)
 	{
 		velocity.x=x;
-		velocity.x=y;
-		velocity.x=z;
+		velocity.y=y;
+		velocity.z=z;
 	}
 	public Vector3f getAcceleration()
 	{
@@ -115,7 +124,37 @@ public class GameItem {
 	public void setAcceleration(float x,float y,float z)
 	{
 		acceleration.x=x;
-		acceleration.x=y;
-		acceleration.x=z;
+		acceleration.y=y;
+		acceleration.z=z;
+	}
+
+	public void setToDelete(boolean b){
+		toDelete = b;
+	}
+
+	public boolean isToDelete() {
+		return toDelete;
+	}
+	public boolean isStartsGame() {
+		return startsGame;
+	}
+
+	public void setStartsGame(boolean startsGame) {
+		this.startsGame = startsGame;
+	}
+
+	public boolean isShowsLeaderboards() {
+		return showsLeaderboards;
+	}
+
+	public void setShowsLeaderboards(boolean showsLeaderboards) {
+		this.showsLeaderboards = showsLeaderboards;
+	}
+	public boolean isExitsGame() {
+		return exitsGame;
+	}
+
+	public void setExitsGame(boolean exitsGame) {
+		this.exitsGame = exitsGame;
 	}
 }
