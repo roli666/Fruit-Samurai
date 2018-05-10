@@ -103,4 +103,5 @@ public class FileUtils {
     public static String getShadersFolder(){return shaders.toString()+"\\";}
     public static String getMeshesFolder(){return meshes.toString()+"\\";}
     public static String getFontsFolder(){return fonts.toString()+"\\";}
+    public static String getResourcesFolder(){return classLoader.getResource("").getPath();}
 }

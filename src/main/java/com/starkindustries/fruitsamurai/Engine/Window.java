@@ -25,6 +25,9 @@ public class Window {
     private double mouseY;
     private boolean fullscreen;
     public  boolean[] keys = new boolean[65536];
+    public  char [] lastChar;
+    private int elapsedTime;
+    private boolean inputEnabled;
 
 
     public Window(String title, int width, int height, boolean vSync,WindowOptions opts) {
@@ -76,18 +79,19 @@ public class Window {
 
         // Setup a key callback. It will be called every time a key is pressed, repeated or released.
         glfwSetKeyCallback(windowID, (window, key, scancode, action, mods) -> {
+            elapsedTime = 0;
             if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE) {
                 glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
             }
-            /*if (isKeyReleased(GLFW_KEY_F12) && fullscreen){
-                glfwSetWindowMonitor(windowID,0L,xpos,ypos,width,height,GLFW_DONT_CARE);
+            if (isKeyPressed(GLFW_KEY_F12) && fullscreen){
+                glfwSetWindowMonitor(windowID,0L,GLFW_DONT_CARE,GLFW_DONT_CARE,width,height,GLFW_DONT_CARE);
                 fullscreen = !fullscreen;
             }
-            else
+            else if(isKeyPressed(GLFW_KEY_F12))
             {
-                glfwSetWindowMonitor(windowID, glfwGetPrimaryMonitor(), xpos, ypos, width, height, GLFW_DONT_CARE);
+                glfwSetWindowMonitor(windowID, glfwGetPrimaryMonitor(), GLFW_DONT_CARE, GLFW_DONT_CARE, width, height, GLFW_DONT_CARE);
                 fullscreen = !fullscreen;
-            }*/
+            }
         });
         glfwSetCursorPosCallback(windowID, posCallback = GLFWCursorPosCallback.create((window, xpos, ypos) -> {
             mouseX = xpos;
@@ -204,6 +208,25 @@ public class Window {
         glfwSetInputMode(windowID, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
     }
 
+    public void setCursor(int desiredCursor){
+        glfwSetCursor(windowID, glfwCreateStandardCursor(desiredCursor));
+    }
+
+    public void enableInput(){
+        inputEnabled = true;
+        glfwSetCharCallback(windowID, (window,codepoint)->{
+            lastChar = Character.toChars(codepoint);
+        });
+    }
+    public void disableInput(){
+        inputEnabled = false;
+        glfwSetCharCallback(windowID, null);
+    }
+
+    public char[] getLastChar() {
+        return lastChar;
+    }
+
     public WindowOptions getOptions() {
         return opts;
     }
@@ -228,5 +251,17 @@ public class Window {
         public boolean showFps;
         public boolean compatibleProfile;
         public boolean antialiasing;
+    }
+
+    public void setElapsedTime(int elapsedTime) {
+        this.elapsedTime = elapsedTime;
+    }
+
+    public int getElapsedTime() {
+        return elapsedTime;
+    }
+
+    public boolean isInputEnabled() {
+        return inputEnabled;
     }
 }

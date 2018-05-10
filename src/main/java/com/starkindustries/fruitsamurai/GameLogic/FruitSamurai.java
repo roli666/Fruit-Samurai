@@ -23,8 +23,9 @@ public class FruitSamurai implements IGameLogic {
     private List<GameItem> items = new ArrayList<>();
     private Background background;
     private Sword sword;
-    private Player player;
-    private float dt;
+    private Player player = new Player();
+    private int secondsPassed;
+    private float intervalBuffer;
     private Hud hud = new Hud();
 
     public FruitSamurai() {
@@ -42,9 +43,6 @@ public class FruitSamurai implements IGameLogic {
 
         background = new Background(Enums.Background.DEFAULT);
         sword = new Sword(Enums.Sword.Glow);
-
-
-
 
         start_melon.menuItem = true;
         start_melon.setPosition(-10,0,0);
@@ -75,9 +73,9 @@ public class FruitSamurai implements IGameLogic {
             window.hideMouse();
             Vector3f newPosition = new Vector3f((float) window.getMouseX()/window.getWidth()*2*16-16, (float) window.getMouseY()/window.getHeight()*2*16-16,sword.getPosition().z);
             sword.setPosition(newPosition);
-            float velocity = (newPosition.sub(sword.previousPos).length()*dt);
+            //float velocity = (newPosition.sub(sword.previousPos).length()*secondsPassed);
             sword.previousPos = newPosition;
-            System.out.println(velocity);
+            //System.out.println(velocity);
             System.out.println(String.format("Slashing at X:%.2f Y:%.2f",window.getMouseX()/window.getWidth()*2*16-16,window.getMouseY()/window.getHeight()*2*16-16));
         }
         if(window.isMouseKeyReleased(GLFW_MOUSE_BUTTON_1) && sword.slashing == true)
@@ -113,7 +111,12 @@ public class FruitSamurai implements IGameLogic {
 
     @Override
     public void update(float interval,Window window) {
-        this.dt = interval;
+        intervalBuffer += interval;
+        if(intervalBuffer>=1) {
+            intervalBuffer = 0;
+            secondsPassed++;
+        }
+        window.setElapsedTime(secondsPassed);
         color += direction * 0.01f;
         if (color > 1) {
             color = 1.0f;
@@ -124,20 +127,18 @@ public class FruitSamurai implements IGameLogic {
             Vector3f swordpos = sword.getPosition();
             Vector3f pos = item.getPosition();
             Vector3f acc = item.getAcceleration();
+            boolean hitFruit = Math.pow(swordpos.x-pos.x,2)+Math.pow(swordpos.y-pos.y,2)+Math.pow(swordpos.z-pos.z,2)<=Math.pow(item.getScale()*0.6+sword.getScale()*0.6,2);
         	if(item.menuItem) {
-        		float rotation = item.getRotation().x + 1f;
-            	if ( rotation > 360 ) {
-            	rotation = 0;
-            	}
-            	item.setRotation(rotation, rotation ,rotation);
             	//Start game
-                if(Math.pow(swordpos.x-pos.x,2)+Math.pow(swordpos.y-pos.y,2)+Math.pow(swordpos.z-pos.z,2)<=Math.pow(item.getScale()*0.6+sword.getScale()*0.6,2) && sword.visible && item.isStartsGame() && item.visible)
+                if(hitFruit && sword.visible && item.isStartsGame() && item.visible) {
+                    player.setPlaying(true);
                     startGame();
+                }
                 //Show LeaderBoards
-                if(Math.pow(swordpos.x-pos.x,2)+Math.pow(swordpos.y-pos.y,2)+Math.pow(swordpos.z-pos.z,2)<=Math.pow(item.getScale()*0.6+sword.getScale()*0.6,2) && sword.visible && item.isShowsLeaderboards() && item.visible)
+                if(hitFruit && sword.visible && item.isShowsLeaderboards() && item.visible)
                     showLeaderboards();
                 //Exit game
-                if(Math.pow(swordpos.x-pos.x,2)+Math.pow(swordpos.y-pos.y,2)+Math.pow(swordpos.z-pos.z,2)<=Math.pow(item.getScale()*0.6+sword.getScale()*0.6,2) && sword.visible && item.isExitsGame() && item.visible)
+                if(hitFruit && sword.visible && item.isExitsGame() && item.visible)
                     exit(window);
         	}
             if(item.affectedByPhysics)
@@ -153,23 +154,29 @@ public class FruitSamurai implements IGameLogic {
                     player.setLives(player.getLives()-1);
                     item.setToDelete(true);
                 }
-                if(Math.pow(swordpos.x-pos.x,2)+Math.pow(swordpos.y-pos.y,2)+Math.pow(swordpos.z-pos.z,2)<=Math.pow(item.getScale()*0.6+sword.getScale()*0.6,2) && sword.visible) {
+                if(hitFruit && sword.visible) {
                     player.setScore(player.getScore()+1);
                     item.setToDelete(true);
                 }
 
                 item.setPosition(pos.add(acc));
-
-            	float rotation = item.getRotation().x + 5f;
-            	if ( rotation > 360 )
-            	{
-            	    rotation = 0;
-            	}
-            	item.setRotation(rotation, rotation, rotation);
             }
+            float rotation = item.getRotation().x + 1f;
+            if ( rotation > 360 )
+            {
+                rotation = 0;
+            }
+            if(item.affectedByPhysics || item.menuItem)
+                item.setRotation(rotation, rotation ,rotation);
         }
-        if(player!=null)
-            if(player.getLives()<=0)
+        if(player.isPlaying())
+            if(player.getLives()<=0) {
+                if(!window.isInputEnabled())
+                    player.setPlaying(false);
+                    player.setShowGetName(true);
+                    window.enableInput();
+            }
+            if(!window.isInputEnabled() && !player.isPlaying())
                 showMenu();
         items = items.stream().filter(f->f.isToDelete()==false).collect(Collectors.toList());
     }
@@ -181,7 +188,6 @@ public class FruitSamurai implements IGameLogic {
 
     private void startGame()
     {
-        player = new Player();
         for(GameItem item : items)
         {
             if(item.menuItem)
@@ -195,6 +201,8 @@ public class FruitSamurai implements IGameLogic {
     }
     private void showMenu()
     {
+        player.setScore(0);
+        player.setLives(3);
         for(GameItem item : items)
         {
             if(item.menuItem)
@@ -206,7 +214,7 @@ public class FruitSamurai implements IGameLogic {
     public void render(Window window) {
         window.setClearColor(color, color, color, 0.0f);
         renderer.render(window,items);
-        hud.render(window);
+        hud.render(window,player);
     }
 
     @Override
