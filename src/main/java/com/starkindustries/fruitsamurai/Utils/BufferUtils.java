@@ -23,6 +23,20 @@ public class BufferUtils {
         result.put(array).flip();
         return result;
     }
+
+    public static ByteBuffer createByteBuffer(int size)
+    {
+        ByteBuffer result = ByteBuffer.allocateDirect(size).order(ByteOrder.nativeOrder());
+        return result;
+    }
+
+    public static ByteBuffer resizeBuffer(ByteBuffer buffer, int newCapacity) {
+        ByteBuffer newBuffer = BufferUtils.createByteBuffer(newCapacity);
+        buffer.flip();
+        newBuffer.put(buffer);
+        return newBuffer;
+    }
+
     public static IntBuffer createIntBuffer(int[] array)
     {
         IntBuffer result = ByteBuffer.allocateDirect(array.length*4).order(ByteOrder.nativeOrder()).asIntBuffer();

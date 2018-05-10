@@ -7,7 +7,6 @@ import static org.lwjgl.opengl.GL11.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.starkindustries.fruitsamurai.Interfaces.IHud;
 import org.joml.Matrix4f;
 
 import com.starkindustries.fruitsamurai.Graphics.GameItem;
@@ -16,7 +15,6 @@ import com.starkindustries.fruitsamurai.Graphics.Mesh;
 import com.starkindustries.fruitsamurai.Graphics.Shader;
 import com.starkindustries.fruitsamurai.Graphics.Transformations;
 import com.starkindustries.fruitsamurai.Utils.FileUtils;
-import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 public class Renderer {
@@ -64,10 +62,10 @@ public class Renderer {
     }
 
     public void clear() {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     }
 
-    public void render(Window window, List<GameItem> items, IHud hud) {
+    public void render(Window window, List<GameItem> items) {
         clear();
 
         if (window.isResized()) {
@@ -75,7 +73,6 @@ public class Renderer {
             window.setResized(false);
         }
 
-        renderHud(window, hud);
         renderWorld(window, items);
     }
 
@@ -109,26 +106,6 @@ public class Renderer {
             }
         }
         shaderProgram.unbind();
-    }
-
-    private void renderHud(Window window, IHud hud) {
-        hudShaderProgram.bind();
-
-        //Matrix4f ortho = transformation.getProjectionMatrixOrtho(0, window.getWidth(), window.getHeight(), 0);
-
-        Matrix4f ortho = transformation.getProjectionMatrixOrtho(-16, 16, 16, -16, 0, 16);
-        for (GameItem gameItem : hud.getGameItems()) {
-            Mesh mesh = gameItem.getMesh();
-            Matrix4f projection_matrix = transformation.buildOrtoProjModelMatrix(gameItem, ortho);
-            hudShaderProgram.setUniformMat4f("projection_matrix", projection_matrix);
-            hudShaderProgram.setUniform("color", gameItem.getMesh().getMaterial().getAmbientColour());
-            hudShaderProgram.setUniform("hasTexture", gameItem.getMesh().getMaterial().isTextured() ? 1 : 0);
-
-            // Render the mesh for this HUD item
-            mesh.render();
-        }
-
-        hudShaderProgram.unbind();
     }
 
     public void cleanup() {

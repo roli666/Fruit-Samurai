@@ -1,19 +1,16 @@
 package com.starkindustries.fruitsamurai.GameLogic;
 
-import com.bulletphysics.dynamics.DynamicsWorld;
-import com.bulletphysics.dynamics.RigidBody;
 import com.starkindustries.fruitsamurai.Engine.Renderer;
 import com.starkindustries.fruitsamurai.Engine.Window;
 import com.starkindustries.fruitsamurai.Graphics.GameItem;
+import com.starkindustries.fruitsamurai.Graphics.Hud;
 import com.starkindustries.fruitsamurai.Interfaces.IGameLogic;
 
 import static org.lwjgl.glfw.GLFW.*;
 
 import java.lang.Math;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.starkindustries.fruitsamurai.Utils.RandomUtils;
@@ -24,13 +21,11 @@ public class FruitSamurai implements IGameLogic {
     private float color = 0.0f;
     private final Renderer renderer;
     private List<GameItem> items = new ArrayList<>();
-    private static DynamicsWorld dynamicsWorld;
-    private static Set<RigidBody> bodies = new HashSet<>();
-    private HUD hud;
     private Background background;
     private Sword sword;
     private Player player;
     private float dt;
+    private Hud hud = new Hud();
 
     public FruitSamurai() {
         renderer = new Renderer();
@@ -39,14 +34,17 @@ public class FruitSamurai implements IGameLogic {
     @Override
     public void init(Window window) throws Exception {
     	renderer.init(window);
+        hud.init(window);
 
         Fruit start_melon = new Fruit(Enums.Fruit.Melon);
         Fruit leaderboard_apple = new Fruit(Enums.Fruit.Apple);
         Fruit exit_orange = new Fruit(Enums.Fruit.Orange);
 
         background = new Background(Enums.Background.DEFAULT);
-        hud = new HUD("DEMO");
         sword = new Sword(Enums.Sword.Glow);
+
+
+
 
         start_melon.menuItem = true;
         start_melon.setPosition(-10,0,0);
@@ -207,14 +205,13 @@ public class FruitSamurai implements IGameLogic {
     @Override
     public void render(Window window) {
         window.setClearColor(color, color, color, 0.0f);
-        hud.updateSize(window);
-        renderer.render(window,items,hud);
+        renderer.render(window,items);
+        hud.render(window);
     }
 
     @Override
     public void cleanup() {
         renderer.cleanup();
         items.parallelStream().filter(f->f.getMesh()!=null).forEach(a->a.getMesh().cleanUp());
-        hud.cleanup();
     }
 }

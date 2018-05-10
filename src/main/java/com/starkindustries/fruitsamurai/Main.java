@@ -13,6 +13,7 @@ public class Main {
             Window.WindowOptions opts = new Window.WindowOptions();
             opts.showFps = true;
             opts.compatibleProfile = true;
+            opts.antialiasing = true;
             GameEngine gameEng = new GameEngine("Fruit Samurai", 800, 600, vsync, opts, gameLogic);
             gameEng.start();
         } catch (Exception e) {

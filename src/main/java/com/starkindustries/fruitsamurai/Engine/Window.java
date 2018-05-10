@@ -122,6 +122,9 @@ public class Window {
         if (opts.showTriangles) {
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         }
+        if (opts.antialiasing) {
+            glfwWindowHint(GLFW_SAMPLES, 4);
+        }
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     }
@@ -210,11 +213,20 @@ public class Window {
     public String getWindowTitle() {
         return windowtitle;
     }
+    public long getWindowID(){
+        return windowID;
+    }
 
+    public void restoreState() {
+        glEnable(GL_DEPTH_TEST);
+        glEnable(GL_STENCIL_TEST);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    }
 
     public static class WindowOptions {
         public boolean showTriangles;
         public boolean showFps;
         public boolean compatibleProfile;
+        public boolean antialiasing;
     }
 }

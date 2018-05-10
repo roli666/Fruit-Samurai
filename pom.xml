@@ -151,11 +151,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.lwjgl</groupId>
-			<artifactId>lwjgl-nuklear</artifactId>
-			<version>${lwjgl.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.lwjgl</groupId>
 			<artifactId>lwjgl-odbc</artifactId>
 			<version>${lwjgl.version}</version>
 		</dependency>
@@ -235,12 +230,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.lwjgl</groupId>
-			<artifactId>lwjgl-nuklear</artifactId>
-			<version>${lwjgl.version}</version>
-			<classifier>${lwjgl.natives}</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.lwjgl</groupId>
 			<artifactId>lwjgl-openal</artifactId>
 			<version>${lwjgl.version}</version>
 			<classifier>${lwjgl.natives}</classifier>
@@ -256,16 +245,6 @@
 			<artifactId>lwjgl-opengles</artifactId>
 			<version>${lwjgl.version}</version>
 			<classifier>${lwjgl.natives}</classifier>
-		</dependency>
-		<dependency>
-			<groupId>com.code-disaster.steamworks4j</groupId>
-			<artifactId>steamworks4j</artifactId>
-			<version>${steamworks4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.code-disaster.steamworks4j</groupId>
-			<artifactId>steamworks4j-server</artifactId>
-			<version>${steamworks4j-server.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.joml</groupId>
