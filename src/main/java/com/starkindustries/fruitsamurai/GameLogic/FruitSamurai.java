@@ -16,6 +16,13 @@ import java.util.stream.Collectors;
 import com.starkindustries.fruitsamurai.Utils.RandomUtils;
 import org.joml.*;
 
+/**
+ * This class represents the Game.
+ * This class implements the {@link IGameLogic} interface.
+ * @author Aszalós Roland
+ * @version 1.0
+ * @since Fruit Samurai 0.1
+ */
 public class FruitSamurai implements IGameLogic {
     private int direction = 0;
     private float color = 0.0f;
@@ -28,10 +35,22 @@ public class FruitSamurai implements IGameLogic {
     private float intervalBuffer;
     private Hud hud = new Hud();
 
+    /**
+     * Standard constructor initializes the {@link Renderer} object.
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     public FruitSamurai() {
         renderer = new Renderer();
     }
-
+    /**
+     * This method initializes the {@link Renderer},{@link Hud} and the game scene.
+     * @param window a standard {@link Window} object
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     @Override
     public void init(Window window) throws Exception {
     	renderer.init(window);
@@ -65,6 +84,12 @@ public class FruitSamurai implements IGameLogic {
         items.add(sword);
     }
 
+    /**
+     * Handles player input.
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     @Override
     public void input(Window window) {
         if(window.isMouseKeyPressed(GLFW_MOUSE_BUTTON_1)){
@@ -108,7 +133,15 @@ public class FruitSamurai implements IGameLogic {
             renderer.setAmbient_light(asd);
         }
     }
-
+    /**
+     * Updates the scene. (Physics calculations etc...)
+     * Not rendering stuff, just logic.
+     * @param interval time elapsed between two frames
+     * @param window a standard {@link Window} object
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     @Override
     public void update(float interval,Window window) {
         intervalBuffer += interval;
@@ -180,12 +213,24 @@ public class FruitSamurai implements IGameLogic {
                 showMenu();
         items = items.stream().filter(f->f.isToDelete()==false).collect(Collectors.toList());
     }
-
+    /**
+     * This method exits the game.
+     * @param window a standard {@link Window} object
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     private void exit(Window window)
     {
         window.closeWindow();
     }
 
+    /**
+     * This method starts the game.
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     private void startGame()
     {
         for(GameItem item : items)
@@ -194,11 +239,21 @@ public class FruitSamurai implements IGameLogic {
             item.visible = false;
         }
     }
-
-    private void showLeaderboards()
-    {
-
+    /**
+     * This method shows the leader boards scene.
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
+    private void showLeaderboards(){
+        //TODO read the scores from the scores.xml file and present it somehow
     }
+    /**
+     * This method shows the main menu.
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     private void showMenu()
     {
         player.setScore(0);
@@ -209,14 +264,24 @@ public class FruitSamurai implements IGameLogic {
                 item.visible = true;
         }
     }
-
+    /**
+     * This method delegates the objects to render, and the HUD to the {@link Renderer}.
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     @Override
     public void render(Window window) {
         window.setClearColor(color, color, color, 0.0f);
         renderer.render(window,items);
         hud.render(window,player);
     }
-
+    /**
+     * This method cleans up unused game objects and calls the {@link Renderer} to clean up.
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     @Override
     public void cleanup() {
         renderer.cleanup();

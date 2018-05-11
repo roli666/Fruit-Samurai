@@ -9,17 +9,34 @@ import org.joml.Vector3f;
 
 import com.starkindustries.fruitsamurai.Graphics.Mesh;
 
+/**
+ * This class is used to load simple Models into the Game.
+ *
+ * @author Aszalós Roland
+ * @version 1.0
+ * @since Fruit Samurai 0.1
+ */
 public class OBJLoader {
-	public static Mesh loadmesh(String file) throws Exception {
+    /**
+     * Creates a {@link Mesh} from the provided file.
+     *
+     * @param file
+     * @return {@link Mesh}
+     * @throws Exception
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
+    public static Mesh loadmesh(String file) throws Exception {
 
-		List<String> lines = FileUtils.loadAsStringList(file);
-		List<Vector3f> vertices = new ArrayList<>();
-		List<Vector2f> textures = new ArrayList<>();
-		List<Vector3f> normals = new ArrayList<>();
-		List<Face> faces = new ArrayList<>();
-		String mtlFileName = null;
-		
-		for (String line : lines) {
+        List<String> lines = FileUtils.loadAsStringList(file);
+        List<Vector3f> vertices = new ArrayList<>();
+        List<Vector2f> textures = new ArrayList<>();
+        List<Vector3f> normals = new ArrayList<>();
+        List<Face> faces = new ArrayList<>();
+        String mtlFileName = null;
+
+        for (String line : lines) {
             String[] tokens = line.split("\\s+");
             switch (tokens[0]) {
                 case "mtllib":
@@ -59,10 +76,24 @@ public class OBJLoader {
         }
         Material mat = null;
         return reorderLists(vertices, textures, normals, faces, mat);
-	}
+    }
 
-	private static Mesh reorderLists(List<Vector3f> posList, List<Vector2f> textCoordList,
-            List<Vector3f> normList, List<Face> facesList,Material mat) {
+    /**
+     * Reorders the lists provided to the function to correctly render the {@link Mesh} object.
+     *
+     * @param posList
+     * @param textCoordList
+     * @param normList
+     * @param facesList
+     * @param mat
+     * @return {@link Mesh}
+     * @throws Exception
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
+    private static Mesh reorderLists(List<Vector3f> posList, List<Vector2f> textCoordList,
+                                     List<Vector3f> normList, List<Face> facesList, Material mat) {
 
         List<Integer> indices = new ArrayList<>();
         // Create position array in the order it has been declared
@@ -90,10 +121,24 @@ public class OBJLoader {
         mesh.setMaterial(mat);
         return mesh;
     }
-	
-	private static void processFaceVertex(IdxGroup indices, List<Vector2f> textCoordList,
-            List<Vector3f> normList, List<Integer> indicesList,
-            float[] texCoordArr, float[] normArr) {
+
+    /**
+     * Reorders the Faces.
+     * @param indices
+     * @param textCoordList
+     * @param normList
+     * @param indicesList
+     * @param texCoordArr
+     * @param normArr
+     * @return {@link Mesh}
+     * @throws Exception
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
+    private static void processFaceVertex(IdxGroup indices, List<Vector2f> textCoordList,
+                                          List<Vector3f> normList, List<Integer> indicesList,
+                                          float[] texCoordArr, float[] normArr) {
 
         // Set index for vertex coordinates
         int posIndex = indices.idxPos;
@@ -113,53 +158,75 @@ public class OBJLoader {
             normArr[posIndex * 3 + 2] = vecNorm.z;
         }
     }
-	
-	protected static class IdxGroup {
-		public static final int NO_VALUE = -1;
-		public int idxPos;
-		public int idxTextCoord;
-		public int idxVecNormal;
 
-		public IdxGroup() {
-			idxPos = NO_VALUE;
-			idxTextCoord = NO_VALUE;
-			idxVecNormal = NO_VALUE;
-		}
-	}
+    /**
+     * This class represents an index group.
+     *
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
+    protected static class IdxGroup {
+        public static final int NO_VALUE = -1;
+        public int idxPos;
+        public int idxTextCoord;
+        public int idxVecNormal;
 
-	protected static class Face {
-		/**
-		 * List of idxGroup groups for a face triangle (3 vertices per face).
-		 */
-		private IdxGroup[] idxGroups = new IdxGroup[3];
+        public IdxGroup() {
+            idxPos = NO_VALUE;
+            idxTextCoord = NO_VALUE;
+            idxVecNormal = NO_VALUE;
+        }
+    }
 
-		public Face(String v1, String v2, String v3) {
-			idxGroups = new IdxGroup[3];
-			// Parse the lines
-			idxGroups[0] = parseLine(v1);
-			idxGroups[1] = parseLine(v2);
-			idxGroups[2] = parseLine(v3);
-		}
+    /**
+     * This class represents a face.
+     *
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
+    protected static class Face {
+        /**
+         * List of idxGroup groups for a face triangle (3 vertices per face).
+         */
+        private IdxGroup[] idxGroups = new IdxGroup[3];
 
-		private IdxGroup parseLine(String line) {
-		IdxGroup idxGroup = new IdxGroup();
-		String[] lineTokens = line.split("/");
-		int length = lineTokens.length;
-		idxGroup.idxPos = Integer.parseInt(lineTokens[0]) - 1;
-		if (length > 1) {
-		// It can be empty if the obj does not define text coords
-		String textCoord = lineTokens[1];
-		idxGroup.idxTextCoord = textCoord.length() > 0 ? Integer.parseInt(textCoord) - 1 : IdxGroup.NO_VALUE;
-		if (length > 2) {
-		idxGroup.idxVecNormal = Integer.parseInt(lineTokens[2]) - 1;
-		}
-		}
-		return idxGroup;
-		}
+        public Face(String v1, String v2, String v3) {
+            idxGroups = new IdxGroup[3];
+            // Parse the lines
+            idxGroups[0] = parseLine(v1);
+            idxGroups[1] = parseLine(v2);
+            idxGroups[2] = parseLine(v3);
+        }
+        /**
+         * Parses an index group.
+         * @author Aszalós Roland
+         * @version 1.0
+         * @since Fruit Samurai 0.1
+         */
+        private IdxGroup parseLine(String line) {
+            IdxGroup idxGroup = new IdxGroup();
+            String[] lineTokens = line.split("/");
+            int length = lineTokens.length;
+            idxGroup.idxPos = Integer.parseInt(lineTokens[0]) - 1;
+            if (length > 1) {
+                // It can be empty if the obj does not define text coords
+                String textCoord = lineTokens[1];
+                idxGroup.idxTextCoord = textCoord.length() > 0 ? Integer.parseInt(textCoord) - 1 : IdxGroup.NO_VALUE;
+                if (length > 2) {
+                    idxGroup.idxVecNormal = Integer.parseInt(lineTokens[2]) - 1;
+                }
+            }
+            return idxGroup;
+        }
 
-		public IdxGroup[] getFaceVertexIndices() {
-			return idxGroups;
-		}
-	}
+        /**
+         * @return the index groups from a face
+         */
+        public IdxGroup[] getFaceVertexIndices() {
+            return idxGroups;
+        }
+    }
 
 }

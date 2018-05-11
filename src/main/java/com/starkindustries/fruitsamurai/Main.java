@@ -5,7 +5,20 @@ import com.starkindustries.fruitsamurai.Engine.Window;
 import com.starkindustries.fruitsamurai.GameLogic.FruitSamurai;
 import com.starkindustries.fruitsamurai.Interfaces.IGameLogic;
 
+/**
+ * The Main class of the application
+ * @author Aszalós Roland
+ * @version 1.0
+ * @since Fruit Samurai 0.1
+ */
 public class Main {
+    /**
+     * Standard Main method to start the application.
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     * @param args
+     */
     public static void main(String[] args) {
         try {
             boolean vsync = true;

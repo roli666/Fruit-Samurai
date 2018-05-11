@@ -17,18 +17,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author Raóland
+ * This class is a utility class to make my life easier and to keep the code more clean.
+ * @author Aszalós Roland
+ * @version 1.0
+ * @since Fruit Samurai 0.1
  */
 public class FileUtils {
-    private FileUtils(){}
-
     private static final ClassLoader classLoader = FileUtils.class.getClassLoader();
     private static final File textures = new File(classLoader.getResource("textures").getPath());
     private static final File shaders = new File(classLoader.getResource("shaders").getPath());
     private static final File meshes = new File(classLoader.getResource("meshes").getPath());
     private static final File fonts = new File(classLoader.getResource("fonts").getPath());
-    
+    /**
+     * Loads a file and creates a String from it
+     * @param file
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     * @return string from file
+     */
     public static String loadAsString(String file)
     {
         StringBuilder result = new StringBuilder();
@@ -48,6 +55,14 @@ public class FileUtils {
         }
         return result.toString();
     }
+    /**
+     * Loads a file and creates a List from it
+     * @param file
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     * @return string from file as {@link List}
+     */
     public static List<String> loadAsStringList(String file)
     {
         List<String> result = new ArrayList<>();
@@ -67,7 +82,16 @@ public class FileUtils {
         }
         return result;
     }
-
+    /**
+     * Loads a file and creates a ByteBuffer from it
+     * @param resource
+     * @param bufferSize
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     * @return string from file as a {@link ByteBuffer}
+     * @throws IOException
+     */
     public static ByteBuffer ioResourceToByteBuffer(String resource, int bufferSize) throws IOException {
         ByteBuffer buffer;
 
@@ -99,9 +123,24 @@ public class FileUtils {
         return buffer;
     }
 
+    /**
+     * @return The path to the textures folder.
+     */
     public static String getTexturesFolder(){return textures.toString()+"\\";}
+    /**
+     * @return The path to the shaders folder.
+     */
     public static String getShadersFolder(){return shaders.toString()+"\\";}
+    /**
+     * @return The path to the meshes folder.
+     */
     public static String getMeshesFolder(){return meshes.toString()+"\\";}
+    /**
+     * @return The path to the fonts folder.
+     */
     public static String getFontsFolder(){return fonts.toString()+"\\";}
+    /**
+     * @return The path to the resources folder.
+     */
     public static String getResourcesFolder(){return classLoader.getResource("").getPath();}
 }

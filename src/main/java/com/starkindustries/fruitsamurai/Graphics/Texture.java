@@ -20,20 +20,27 @@ import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL12.*;
 
 /**
- * @author Raóland
+ * This class represents a Texture.
+ * @author Aszalós Roland
+ * @version 1.0
+ * @since Fruit Samurai 0.1
  */
 public class Texture {
     private int width, height;
     private final int texture;
     private int size;
 
+    /**
+     * Constructor that loads a texture from an image.
+     * @param path
+     * @throws Exception
+     */
     public Texture(String path) throws Exception {
         texture = load(path);
     }
 
     /**
      * Creates an empty texture.
-     *
      * @param width       Width of the texture
      * @param height      Height of the texture
      * @param pixelFormat Specifies the format of the pixel data (GL_RGBA, etc.)
@@ -50,7 +57,11 @@ public class Texture {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     }
-
+    /**
+     * Loads a texture from an InputStream
+     * @param is
+     * @throws Exception
+     */
     public Texture(InputStream is) throws Exception {
         // Load Texture file
         PNGDecoder decoder = new PNGDecoder(is);
@@ -78,7 +89,11 @@ public class Texture {
         // Generate Mip Map
         glGenerateMipmap(GL_TEXTURE_2D);
     }
-
+    /**
+     * Loads a texture from an image.
+     * @param path
+     * @throws Exception
+     */
     private int load(String path) throws Exception {
         int[] pixels = null;
         try {
@@ -112,17 +127,27 @@ public class Texture {
         return textureID;
     }
 
+    /**
+     * Gets the id
+     * @return the ID of the {@link Texture}
+     */
     public int getID() {
         return texture;
     }
 
-    public void bind() {
-        glBindTexture(GL_TEXTURE_2D, texture);
-    }
-
+    /**
+     * Gets the width
+     * @return the width of the {@link Texture}
+     */
     public int getWidth(){return width;}
+    /**
+     * Gets the height
+     * @return the height of the {@link Texture}
+     */
     public int getHeight(){return height;}
-
+    /**
+     * Cleans up the {@link Texture}.
+     */
     public void cleanup() {
         glDeleteTextures(texture);
     }

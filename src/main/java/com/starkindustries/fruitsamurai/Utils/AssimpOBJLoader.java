@@ -13,12 +13,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.lwjgl.assimp.Assimp.*;
-
+/**
+ * This class is used to load complex Models into the Game.
+ * The AI objects use the {@link Assimp} class for more information check the official <a href="https://github.com/assimp/assimp">Assimp</a> website
+ * @author Aszalós Roland
+ * @version 1.0
+ * @since Fruit Samurai 0.1
+ */
 public class AssimpOBJLoader {
+    /**
+     * Loads a file from the provided resource path.
+     * @param resourcePath
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     * @throws Exception
+     * @return a {@link Mesh} array
+     */
     public static Mesh[] load(String resourcePath) throws Exception {
         return load(resourcePath, aiProcess_JoinIdenticalVertices | aiProcess_Triangulate | aiProcess_FixInfacingNormals);
     }
-
+    /**
+     * Loads a file from the provided resource path.
+     * @param resourcePath
+     * @param flags AssimpFlags
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     * @throws Exception
+     * @return a {@link Mesh} array
+     */
     public static Mesh[] load(String resourcePath, int flags) throws Exception {
         AIScene aiScene = aiImportFile(resourcePath, flags);
         if (aiScene == null) {
@@ -41,7 +65,15 @@ public class AssimpOBJLoader {
         }
         return meshes;
     }
-
+    /**
+     * Processes the material that came with the resource.
+     * @param aiMaterial
+     * @param materials a list of {@link Material} objects
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     * @throws Exception
+     */
     private static void processMaterial(AIMaterial aiMaterial, List<Material> materials) throws Exception {
         AIColor4D colour = AIColor4D.create();
         AIString path = AIString.calloc();
@@ -71,7 +103,16 @@ public class AssimpOBJLoader {
         material.setTexture(texture);
         materials.add(material);
     }
-
+    /**
+     * Processes the meshes that came with the resource.
+     * @param aiMesh
+     * @param materials a list of {@link Material} objects
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     * @throws Exception
+     * @return {@link Mesh}
+     */
     private static Mesh processMesh(AIMesh aiMesh, List<Material> materials) {
         List<Float> vertices = new ArrayList<>();
         List<Float> textures = new ArrayList<>();
@@ -97,7 +138,15 @@ public class AssimpOBJLoader {
         mesh.setMaterial(material);
         return mesh;
     }
-
+    /**
+     * Processes the vertices in a mesh.
+     * @param aiMesh
+     * @param vertices a list of floats
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     * @throws Exception
+     */
     private static void processVertices(AIMesh aiMesh, List<Float> vertices) {
         AIVector3D.Buffer aiVertices = aiMesh.mVertices();
         while (aiVertices.remaining() > 0) {
@@ -107,7 +156,15 @@ public class AssimpOBJLoader {
             vertices.add(aiVertex.z());
         }
     }
-
+    /**
+     * Processes the normals in a mesh.
+     * @param aiMesh
+     * @param normals a list of floats
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     * @throws Exception
+     */
     private static void processNormals(AIMesh aiMesh, List<Float> normals) {
         AIVector3D.Buffer aiNormals = aiMesh.mNormals();
         while (aiNormals != null && aiNormals.remaining() > 0) {
@@ -117,7 +174,15 @@ public class AssimpOBJLoader {
             normals.add(aiNormal.z());
         }
     }
-
+    /**
+     * Processes the textures in a mesh.
+     * @param aiMesh
+     * @param textures a list of floats
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     * @throws Exception
+     */
     private static void processTextCoords(AIMesh aiMesh, List<Float> textures) {
         AIVector3D.Buffer textCoords = aiMesh.mTextureCoords(0);
         int numTextCoords = textCoords != null ? textCoords.remaining() : 0;
@@ -127,7 +192,15 @@ public class AssimpOBJLoader {
             textures.add(1 - textCoord.y());
         }
     }
-
+    /**
+     * Processes the indices in a mesh.
+     * @param aiMesh
+     * @param indices a list of ints
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     * @throws Exception
+     */
     private static void processIndices(AIMesh aiMesh, List<Integer> indices) {
         int numFaces = aiMesh.mNumFaces();
         AIFace.Buffer aiFaces = aiMesh.mFaces();

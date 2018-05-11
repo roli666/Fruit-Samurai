@@ -16,37 +16,47 @@ import com.starkindustries.fruitsamurai.Graphics.Shader;
 import com.starkindustries.fruitsamurai.Graphics.Transformations;
 import com.starkindustries.fruitsamurai.Utils.FileUtils;
 import org.joml.Vector4f;
-
+/**
+ * This class manages rendering to the given {@link Window}
+ * @author Aszalós Roland
+ * @version 1.0
+ * @since Fruit Samurai 0.1
+ */
 public class Renderer {
 
     private Shader shaderProgram;
-    private Shader hudShaderProgram;
     private Matrix4f projection_matrix;
     private Transformations transformation;
     private Vector4f ambient_light;
-
+    /**
+     * Standard constructor initializes the transformations.
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     public Renderer() {
         transformation = new Transformations();
     }
-
+    /**
+     * Initializes the orthographic projection matrix and the shaders.
+     * @param window
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     public void init(Window window) throws Exception {
         ambient_light = new Vector4f(1, 1, 1, 1);
         projection_matrix = transformation.getProjectionMatrixOrtho(-16, 16, 16, -16, 0, 16);
 
-        setupHudShader();
         setupWorldShader();
     }
-
-    private void setupHudShader() throws Exception {
-        hudShaderProgram = new Shader();
-        hudShaderProgram.createVertexShader(FileUtils.loadAsString(FileUtils.getShadersFolder()+"hud.vs"));
-        hudShaderProgram.createFragmentShader(FileUtils.loadAsString(FileUtils.getShadersFolder()+"hud.fs"));
-        hudShaderProgram.link();
-
-        hudShaderProgram.createUniform("projection_matrix");
-        hudShaderProgram.createUniform("color");
-        hudShaderProgram.createUniform("hasTexture");
-    }
+    /**
+     * Initializes the World Shader
+     * @throws Exception
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     private void setupWorldShader() throws Exception {
         shaderProgram = new Shader();
         shaderProgram.createVertexShader(FileUtils.loadAsString(FileUtils.getShadersFolder() + "bg_def.vs"));
@@ -60,11 +70,25 @@ public class Renderer {
         shaderProgram.createUniform("use_color");
         shaderProgram.createUniform("ambient_light");
     }
-
+    /**
+     * Clears the OpenGL buffers, the game uses.
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     public void clear() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     }
-
+    /**
+     * Renders the World from the given list of {@link GameItem} objects.
+     * Also changes the viewport when the window gets resized.
+     * Calls the {@link #renderWorld(Window, List)} method.
+     * @param window
+     * @param items
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     public void render(Window window, List<GameItem> items) {
         clear();
 
@@ -75,7 +99,13 @@ public class Renderer {
 
         renderWorld(window, items);
     }
-
+    /**
+     * Renders the World from the given list of {@link GameItem} objects, and binds the shaders.
+     * Also sets the uniforms that the shader needs.
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     private void renderWorld(Window window, List<GameItem> items) {
         shaderProgram.bind();
         shaderProgram.setUniform1i("texture_sampler", 0);
@@ -107,17 +137,28 @@ public class Renderer {
         }
         shaderProgram.unbind();
     }
-
+    /**
+     * Cleans up the shader.
+     * @see Shader#cleanup() for more information.
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     public void cleanup() {
         if (shaderProgram != null) {
             shaderProgram.cleanup();
         }
     }
-
+    /**
+     *@param ambient_light Sets light from a {@link org.joml.Vector3f} object
+     */
     public void setAmbient_light(Vector4f ambient_light) {
         this.ambient_light = ambient_light;
     }
 
+    /**
+     * @return current ambient_light
+     */
     public Vector4f getAmbient_light() {
         return ambient_light;
     }

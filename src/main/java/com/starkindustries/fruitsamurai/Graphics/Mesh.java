@@ -14,7 +14,12 @@ import static org.lwjgl.opengl.GL13.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
-
+/**
+ * This class represents a Mesh.
+ * @author Aszalós Roland
+ * @version 1.0
+ * @since Fruit Samurai 0.1
+ */
 public class Mesh {
 
     private final int vaoId;
@@ -24,6 +29,16 @@ public class Mesh {
     private Vector3f DEFAULT_COLOR = new Vector3f(1f, 1f, 1f);
     private Material mat;
 
+    /**
+     * Standard constructor of the {@link Mesh} class.
+     * @param positions
+     * @param indices
+     * @param textcoords
+     * @param normals
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     public Mesh(float[] positions, int[] indices, float[] textcoords, float[] normals) {
 
         FloatBuffer verticesBuffer = null;
@@ -92,7 +107,16 @@ public class Mesh {
             }
         }
     }
-
+    /**
+     * Standard constructor of the {@link Mesh} class.
+     * @param positions
+     * @param indices
+     * @param textcoords
+     * @param normals
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     public Mesh(List<Float> positions, List<Integer> indices, List<Float> textcoords, List<Float> normals) {
 
         FloatBuffer verticesBuffer = null;
@@ -161,36 +185,55 @@ public class Mesh {
             }
         }
     }
-
+    /**
+     * @param color sets the color of the{@link Mesh}
+     */
     public void setColor(Vector3f color) {
         this.color = color;
     }
-
+    /**
+     * @param mat sets the {@link Material} of the{@link Mesh}
+     */
     public void setMaterial(Material mat) {
         this.mat = mat;
     }
-
+    /**
+     * @return the {@link Material} from the {@link Mesh}
+     */
     public Material getMaterial() {
         return mat;
     }
-
+    /**
+     * @return whether the {@link Mesh} has a {@link Material} or not.
+     */
     public boolean hasMaterial() {
         return mat != null;
     }
-
+    /**
+     * @return the color of the {@link Mesh}
+     */
     public Vector3f getColor() {
         return this.color;
     }
-
+    /**
+     * @return the vertex array object id of the {@link Mesh}
+     */
     public int getVaoId() {
         return vaoId;
     }
-
+    /**
+     * @return vertex count from the {@link Mesh}
+     */
     public int getVertexCount() {
         return vertexCount;
     }
 
-
+    /**
+     * This method initializes the {@link Mesh} to render.
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     protected void initRender() {
         Texture texture = mat != null ? mat.getTexture() : null;
         if (texture != null) {
@@ -213,7 +256,12 @@ public class Mesh {
         glEnableVertexAttribArray(1);
         glEnableVertexAttribArray(2);
     }
-
+    /**
+     * This method gets called when the rendering has ended.
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     protected void endRender() {
         // Restore state
         glDisableVertexAttribArray(0);
@@ -223,7 +271,12 @@ public class Mesh {
 
         glBindTexture(GL_TEXTURE_2D, 0);
     }
-
+    /**
+     * This method renders the mesh.
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     public void render() {
         initRender();
 
@@ -231,7 +284,12 @@ public class Mesh {
 
         endRender();
     }
-
+    /**
+     * This method cleans up the mesh.
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     public void cleanUp() {
         glDisableVertexAttribArray(0);
 
@@ -251,6 +309,12 @@ public class Mesh {
         glBindVertexArray(0);
         glDeleteVertexArrays(vaoId);
     }
+    /**
+     * This method deletes the buffers.
+     * @author Aszalós Roland
+     * @version 1.0
+     * @since Fruit Samurai 0.1
+     */
     public void deleteBuffers() {
         glDisableVertexAttribArray(0);
 
