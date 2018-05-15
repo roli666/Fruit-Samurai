@@ -38,7 +38,7 @@ public class FileUtils {
      */
     public static String loadAsString(URL file)
     {
-        logger.debug("URL:",file);
+        logger.debug("URL:{}",file);
         StringBuilder result = new StringBuilder();
         try 
         {
@@ -66,7 +66,7 @@ public class FileUtils {
      */
     public static List<String> loadAsStringList(URL file)
     {
-        logger.debug("URL:",file);
+        logger.debug("URL:{}",file);
         List<String> result = new ArrayList<>();
         try 
         {
@@ -95,7 +95,7 @@ public class FileUtils {
      * @throws IOException
      */
     public static ByteBuffer ioResourceToByteBuffer(URL resource, int bufferSize) throws IOException {
-        logger.debug("URL:",resource);
+        logger.debug("URL:{}",resource);
         ByteBuffer buffer;
 
         Path path = Paths.get(resource.getPath().substring(1));
