@@ -24,7 +24,6 @@ import java.util.List;
  * @since Fruit Samurai 0.1
  */
 public class FileUtils {
-    private static final ClassLoader classLoader = FileUtils.class.getClassLoader();
     /**
      * Loads a file and creates a String from it
      * @param file
@@ -100,7 +99,7 @@ public class FileUtils {
             }
         } else {
             try (
-                    InputStream source = FileUtils.class.getResourceAsStream(resource.getFile());
+                    InputStream source = resource.openStream();
                     ReadableByteChannel rbc = Channels.newChannel(source)) {
                 buffer = BufferUtils.createByteBuffer(bufferSize);
 
