@@ -47,7 +47,7 @@ public class FruitSamurai implements IGameLogic {
      */
     public FruitSamurai() {
         renderer = new Renderer();
-        Logger logger = LoggerFactory.getLogger("com.starkindustries.fruitsamurai.GameLogic.FruitSamurai");
+        logger = LoggerFactory.getLogger("com.starkindustries.fruitsamurai.GameLogic.FruitSamurai");
     }
     /**
      * This method initializes the {@link Renderer},{@link Hud} and the game scene.
