@@ -5,6 +5,9 @@
  */
 package com.starkindustries.fruitsamurai.Utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.net.URL;
 import java.nio.ByteBuffer;
@@ -24,6 +27,7 @@ import java.util.List;
  * @since Fruit Samurai 0.1
  */
 public class FileUtils {
+    private static Logger logger = LoggerFactory.getLogger("com.starkindustries.fruitsamurai.Utils.FileUtils");
     /**
      * Loads a file and creates a String from it
      * @param file
@@ -34,6 +38,7 @@ public class FileUtils {
      */
     public static String loadAsString(URL file)
     {
+        logger.debug("URL:",file);
         StringBuilder result = new StringBuilder();
         try 
         {
@@ -61,6 +66,7 @@ public class FileUtils {
      */
     public static List<String> loadAsStringList(URL file)
     {
+        logger.debug("URL:",file);
         List<String> result = new ArrayList<>();
         try 
         {
@@ -89,6 +95,7 @@ public class FileUtils {
      * @throws IOException
      */
     public static ByteBuffer ioResourceToByteBuffer(URL resource, int bufferSize) throws IOException {
+        logger.debug("URL:",resource);
         ByteBuffer buffer;
 
         Path path = Paths.get(resource.getPath().substring(1));
