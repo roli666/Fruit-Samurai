@@ -8,6 +8,9 @@ import com.starkindustries.fruitsamurai.Interfaces.IGameLogic;
 
 import static org.lwjgl.glfw.GLFW.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.lang.Math;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +37,7 @@ public class FruitSamurai implements IGameLogic {
     private int secondsPassed;
     private float intervalBuffer;
     private Hud hud = new Hud();
+    private Logger logger;
 
     /**
      * Standard constructor initializes the {@link Renderer} object.
@@ -43,6 +47,7 @@ public class FruitSamurai implements IGameLogic {
      */
     public FruitSamurai() {
         renderer = new Renderer();
+        Logger logger = LoggerFactory.getLogger("com.starkindustries.fruitsamurai.GameLogic.FruitSamurai");
     }
     /**
      * This method initializes the {@link Renderer},{@link Hud} and the game scene.
@@ -222,6 +227,7 @@ public class FruitSamurai implements IGameLogic {
      */
     private void exit(Window window)
     {
+        logger.debug("exiting game");
         window.closeWindow();
     }
 
@@ -233,6 +239,7 @@ public class FruitSamurai implements IGameLogic {
      */
     private void startGame()
     {
+        logger.debug("started game");
         for(GameItem item : items)
         {
             if(item.menuItem)
