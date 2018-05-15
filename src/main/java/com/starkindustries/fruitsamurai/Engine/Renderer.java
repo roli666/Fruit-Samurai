@@ -59,8 +59,8 @@ public class Renderer {
      */
     private void setupWorldShader() throws Exception {
         shaderProgram = new Shader();
-        shaderProgram.createVertexShader(FileUtils.loadAsString(FileUtils.getShadersFolder() + "bg_def.vs"));
-        shaderProgram.createFragmentShader(FileUtils.loadAsString(FileUtils.getShadersFolder() + "bg_def.fs"));
+        shaderProgram.createVertexShader(FileUtils.loadAsString(Renderer.class.getResource("/shaders/bg_def.vs")));
+        shaderProgram.createFragmentShader(FileUtils.loadAsString(Renderer.class.getResource("/shaders/bg_def.fs")));
         shaderProgram.link();
 
         shaderProgram.createUniform("projection_matrix");

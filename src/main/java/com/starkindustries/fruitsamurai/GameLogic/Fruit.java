@@ -32,13 +32,13 @@ public class Fruit extends GameItem {
         switch (ft)
         {
             case Apple:
-                mesh = AssimpOBJLoader.load(FileUtils.getMeshesFolder()+"apple.obj");
+                mesh = AssimpOBJLoader.load(Fruit.class.getResource("/meshes/apple.obj"));
                 break;
             case Melon:
-                mesh = AssimpOBJLoader.load(FileUtils.getMeshesFolder()+"melon.obj");
+                mesh = AssimpOBJLoader.load(Fruit.class.getResource("/meshes/melon.obj"));
                 break;
             case Orange:
-                mesh = AssimpOBJLoader.load(FileUtils.getMeshesFolder()+"orange.obj");
+                mesh = AssimpOBJLoader.load(Fruit.class.getResource("/meshes/orange.obj"));
                 break;
         }
         setMesh(mesh);

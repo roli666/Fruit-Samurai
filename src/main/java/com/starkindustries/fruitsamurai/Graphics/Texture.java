@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.nio.ByteBuffer;
 import javax.imageio.ImageIO;
 
@@ -35,7 +36,7 @@ public class Texture {
      * @param path
      * @throws Exception
      */
-    public Texture(String path) throws Exception {
+    public Texture(URL path) throws Exception {
         texture = load(path);
     }
 
@@ -94,10 +95,10 @@ public class Texture {
      * @param path
      * @throws Exception
      */
-    private int load(String path) throws Exception {
+    private int load(URL path) throws Exception {
         int[] pixels = null;
         try {
-            BufferedImage image = ImageIO.read(new FileInputStream(path));
+            BufferedImage image = ImageIO.read(new FileInputStream(path.getFile()));
             width = image.getWidth();
             height = image.getHeight();
             size = width * height;

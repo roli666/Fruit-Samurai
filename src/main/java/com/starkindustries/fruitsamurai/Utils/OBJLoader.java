@@ -1,5 +1,6 @@
 package com.starkindustries.fruitsamurai.Utils;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class OBJLoader {
      * @version 1.0
      * @since Fruit Samurai 0.1
      */
-    public static Mesh loadmesh(String file) throws Exception {
+    public static Mesh loadmesh(URL file) throws Exception {
 
         List<String> lines = FileUtils.loadAsStringList(file);
         List<Vector3f> vertices = new ArrayList<>();
@@ -40,7 +41,7 @@ public class OBJLoader {
             String[] tokens = line.split("\\s+");
             switch (tokens[0]) {
                 case "mtllib":
-                    mtlFileName = FileUtils.getMeshesFolder() + tokens[1];
+                    mtlFileName = "asd";
                     break;
                 case "v":
                     // Geometric vertex

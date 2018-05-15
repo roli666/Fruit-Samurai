@@ -8,6 +8,7 @@ import org.lwjgl.PointerBuffer;
 import org.lwjgl.assimp.*;
 
 import java.io.File;
+import java.net.URL;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class AssimpOBJLoader {
      * @throws Exception
      * @return a {@link Mesh} array
      */
-    public static Mesh[] load(String resourcePath) throws Exception {
+    public static Mesh[] load(URL resourcePath) throws Exception {
         return load(resourcePath, aiProcess_JoinIdenticalVertices | aiProcess_Triangulate | aiProcess_FixInfacingNormals);
     }
     /**
@@ -43,8 +44,8 @@ public class AssimpOBJLoader {
      * @throws Exception
      * @return a {@link Mesh} array
      */
-    public static Mesh[] load(String resourcePath, int flags) throws Exception {
-        AIScene aiScene = aiImportFile(resourcePath, flags);
+    public static Mesh[] load(URL resourcePath, int flags) throws Exception {
+        AIScene aiScene = aiImportFile(resourcePath.getPath().substring(1), flags);
         if (aiScene == null) {
             throw new Exception("Error loading model");
         }
@@ -82,7 +83,7 @@ public class AssimpOBJLoader {
         Texture texture = null;
         if (textPath != null && textPath.length() > 0) {
             TextureCache textCache = TextureCache.getInstance();
-            texture = textCache.getTexture(FileUtils.getTexturesFolder()+textPath);
+            texture = textCache.getTexture(AssimpOBJLoader.class.getResource("/textures/"+textPath));
         }
         Vector4f ambient = Material.DEFAULT_COLOUR;
         int result = aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_AMBIENT, aiTextureType_NONE, 0, colour);

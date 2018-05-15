@@ -7,6 +7,7 @@ import com.starkindustries.fruitsamurai.Utils.FileUtils;
 import org.lwjgl.nanovg.NVGColor;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
 import java.nio.DoubleBuffer;
 
@@ -59,7 +60,7 @@ public class Hud {
             throw new Exception("Could not init NanoVG");
         }
 
-        fontBuffer = FileUtils.ioResourceToByteBuffer(FileUtils.getFontsFolder() + "calibri.ttf", 150 * 1024);
+        fontBuffer = FileUtils.ioResourceToByteBuffer(Hud.class.getResource("/fonts/calibri.ttf"), 150 * 1024);
         int font = nvgCreateFontMem(vg, FONT_NAME, fontBuffer, 0);
         if (font == -1) {
             throw new Exception("Could not add Font");
@@ -107,7 +108,12 @@ public class Hud {
             if (window.isKeyPressed(GLFW_KEY_ENTER) || window.isKeyPressed(GLFW_KEY_KP_ENTER)) {
                 player.setShowGetName(false);
                 player.setName(playerName);
-                File f = new File(FileUtils.getResourcesFolder()+"scores.xml");
+                File f = null;
+                try {
+                    f = new File(Hud.class.getProtectionDomain().getCodeSource().getLocation().toURI()+"scores.xml");
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
                 if(f.exists() && !f.isDirectory()) {
                     try {
                         addXMLnode(player);
@@ -237,7 +243,7 @@ public class Hud {
             TransformerFactory tf = TransformerFactory.newInstance();
             Transformer t = tf.newTransformer();
             DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File(FileUtils.getResourcesFolder()+"scores.xml"));
+            StreamResult result = new StreamResult(new File(Hud.class.getProtectionDomain().getCodeSource().getLocation().toURI()+"scores.xml"));
             t.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
             t.setOutputProperty(OutputKeys.INDENT,"yes");
             t.setOutputProperty("{http://xml.apache.org/xslt}indent-amount","4");
@@ -247,6 +253,8 @@ public class Hud {
         } catch (TransformerException e) {
             e.printStackTrace();
         } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
             e.printStackTrace();
         }
     }
@@ -261,7 +269,7 @@ public class Hud {
     void addXMLnode(Player player) throws Exception {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-        Document document = documentBuilder.parse(FileUtils.getResourcesFolder() + "scores.xml");
+        Document document = documentBuilder.parse(Hud.class.getResource("scores.xml").getFile());
         Element root = document.getDocumentElement();
 
         Element newPlayer = document.createElement("Player");
@@ -280,7 +288,7 @@ public class Hud {
 
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
-        StreamResult result = new StreamResult(FileUtils.getResourcesFolder() + "scores.xml");
+        StreamResult result = new StreamResult(Hud.class.getResource("scores.xml").getFile());
         transformer.transform(source, result);
     }
 }

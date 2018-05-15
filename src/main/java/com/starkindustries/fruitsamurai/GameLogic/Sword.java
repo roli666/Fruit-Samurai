@@ -27,12 +27,12 @@ public class Sword extends GameItem {
      */
     Sword(Enums.Sword st) throws Exception{
         super();
-        Mesh mesh = OBJLoader.loadmesh(FileUtils.getMeshesFolder()+"sword.obj");
+        Mesh mesh = OBJLoader.loadmesh(Fruit.class.getResource("/meshes/sword.obj"));
         slashing = false;
         super.visible = false;
         switch (st) {
             case Glow:
-                t_sword = new Texture(FileUtils.getTexturesFolder() + "sword.png");
+                t_sword = new Texture(Fruit.class.getResource("/textures/sword.png"));
                 break;
         }
         previousPos = super.getPosition();

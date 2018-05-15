@@ -6,6 +6,7 @@
 package com.starkindustries.fruitsamurai.Utils;
 
 import java.io.*;
+import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
@@ -24,10 +25,6 @@ import java.util.List;
  */
 public class FileUtils {
     private static final ClassLoader classLoader = FileUtils.class.getClassLoader();
-    private static final File textures = new File(classLoader.getResource("textures").getPath());
-    private static final File shaders = new File(classLoader.getResource("shaders").getPath());
-    private static final File meshes = new File(classLoader.getResource("meshes").getPath());
-    private static final File fonts = new File(classLoader.getResource("fonts").getPath());
     /**
      * Loads a file and creates a String from it
      * @param file
@@ -36,12 +33,12 @@ public class FileUtils {
      * @since Fruit Samurai 0.1
      * @return string from file
      */
-    public static String loadAsString(String file)
+    public static String loadAsString(URL file)
     {
         StringBuilder result = new StringBuilder();
         try 
         {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+            BufferedReader reader = new BufferedReader(new FileReader(file.getPath()));
             String buffer = "";
             while((buffer = reader.readLine())!=null)
             {
@@ -63,12 +60,12 @@ public class FileUtils {
      * @since Fruit Samurai 0.1
      * @return string from file as {@link List}
      */
-    public static List<String> loadAsStringList(String file)
+    public static List<String> loadAsStringList(URL file)
     {
         List<String> result = new ArrayList<>();
         try 
         {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+            BufferedReader reader = new BufferedReader(new FileReader(file.getFile()));
             String buffer = "";
             while((buffer = reader.readLine())!=null)
             {
@@ -92,10 +89,10 @@ public class FileUtils {
      * @return string from file as a {@link ByteBuffer}
      * @throws IOException
      */
-    public static ByteBuffer ioResourceToByteBuffer(String resource, int bufferSize) throws IOException {
+    public static ByteBuffer ioResourceToByteBuffer(URL resource, int bufferSize) throws IOException {
         ByteBuffer buffer;
 
-        Path path = Paths.get(resource);
+        Path path = Paths.get(resource.getPath().substring(1));
         if (Files.isReadable(path)) {
             try (SeekableByteChannel fc = Files.newByteChannel(path)) {
                 buffer = BufferUtils.createByteBuffer((int) fc.size() + 1);
@@ -103,7 +100,7 @@ public class FileUtils {
             }
         } else {
             try (
-                    InputStream source = FileUtils.class.getResourceAsStream(resource);
+                    InputStream source = FileUtils.class.getResourceAsStream(resource.getFile());
                     ReadableByteChannel rbc = Channels.newChannel(source)) {
                 buffer = BufferUtils.createByteBuffer(bufferSize);
 
@@ -122,25 +119,4 @@ public class FileUtils {
         buffer.flip();
         return buffer;
     }
-
-    /**
-     * @return The path to the textures folder.
-     */
-    public static String getTexturesFolder(){return textures.toString()+"\\";}
-    /**
-     * @return The path to the shaders folder.
-     */
-    public static String getShadersFolder(){return shaders.toString()+"\\";}
-    /**
-     * @return The path to the meshes folder.
-     */
-    public static String getMeshesFolder(){return meshes.toString()+"\\";}
-    /**
-     * @return The path to the fonts folder.
-     */
-    public static String getFontsFolder(){return fonts.toString()+"\\";}
-    /**
-     * @return The path to the resources folder.
-     */
-    public static String getResourcesFolder(){return classLoader.getResource("").getPath();}
 }

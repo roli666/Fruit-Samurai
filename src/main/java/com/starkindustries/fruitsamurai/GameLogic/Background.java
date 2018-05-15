@@ -26,16 +26,16 @@ public class Background extends GameItem {
      * @throws Exception
      */
     Background(Enums.Background background) throws Exception{
-        Mesh mesh = OBJLoader.loadmesh(FileUtils.getMeshesFolder()+"background.obj");
-        Texture t_background = new Texture(FileUtils.getTexturesFolder()+"background_def.jpg");
+        Mesh mesh = OBJLoader.loadmesh(Fruit.class.getResource("/meshes/background.obj"));
+        Texture t_background = new Texture(Fruit.class.getResource("/textures/background_def.jpg"));
         menuItem = false;
         switch (background)
         {
             case DEFAULT:
-                t_background = new Texture(FileUtils.getTexturesFolder()+"background_def.jpg");
+                t_background = new Texture(Fruit.class.getResource("/textures/background_def.jpg"));
                 break;
             case SAMURAI:
-                t_background = new Texture(FileUtils.getTexturesFolder()+"background_2.jpg");
+                t_background = new Texture(Fruit.class.getResource("/textures/background_2.jpg"));
                 break;
         }
         mesh.setMaterial(new Material());
@@ -54,10 +54,10 @@ public class Background extends GameItem {
         switch (background)
         {
             case DEFAULT:
-                getMesh().getMaterial().setTexture(new Texture(FileUtils.getTexturesFolder()+"background_def.jpg"));
+                getMesh().getMaterial().setTexture(new Texture(Fruit.class.getResource("/textures/background_def.jpg")));
                 break;
             case SAMURAI:
-                getMesh().getMaterial().setTexture(new Texture(FileUtils.getTexturesFolder()+"background_2.jpg"));
+                getMesh().getMaterial().setTexture(new Texture(Fruit.class.getResource("/textures/background_2.jpg")));
                 break;
         }
     }
