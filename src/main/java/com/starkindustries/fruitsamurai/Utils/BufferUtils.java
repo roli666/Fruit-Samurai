@@ -5,6 +5,9 @@
  */
 package com.starkindustries.fruitsamurai.Utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
@@ -17,6 +20,7 @@ import java.nio.IntBuffer;
  * @since Fruit Samurai 0.1
  */
 public class BufferUtils {
+    private static final Logger logger = LoggerFactory.getLogger(BufferUtils.class.getName());
     private BufferUtils(){}
 
     /**
@@ -31,6 +35,24 @@ public class BufferUtils {
     {
         ByteBuffer result = ByteBuffer.allocateDirect(array.length).order(ByteOrder.nativeOrder());
         result.put(array).flip();
+        return result;
+    }
+
+    public static byte[] null_terminate_byte_array(byte[] array)
+    {
+        int i = 0;
+        byte[] result = new byte[array.length + 1];
+        try {
+            for (; i < array.length; i++)
+                result[i] = array[i];
+            result[array.length + 1] = 0;
+        }
+        catch (IndexOutOfBoundsException e)
+        {
+            logger.debug("iterator: {}",i);
+            logger.debug("input array length: {}",array.length);
+            logger.debug("result array length: {}",result.length);
+        }
         return result;
     }
     /**

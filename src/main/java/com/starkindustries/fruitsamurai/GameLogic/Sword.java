@@ -24,15 +24,16 @@ public class Sword extends GameItem {
      * @author Aszalós Roland
      * @version 1.0
      * @since Fruit Samurai 0.1
+     * @throws Exception
      */
     Sword(Enums.Sword st) throws Exception{
         super();
-        Mesh mesh = OBJLoader.loadmesh(Fruit.class.getResource("/meshes/sword.obj"));
+        Mesh mesh = OBJLoader.loadmesh("/meshes/sword.obj");
         slashing = false;
         super.visible = false;
         switch (st) {
             case Glow:
-                t_sword = new Texture(Fruit.class.getResource("/textures/sword.png"));
+                t_sword = new Texture("/textures/sword.png");
                 break;
         }
         previousPos = super.getPosition();

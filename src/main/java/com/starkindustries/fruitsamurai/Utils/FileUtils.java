@@ -5,6 +5,7 @@
  */
 package com.starkindustries.fruitsamurai.Utils;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,22 +28,22 @@ import java.util.List;
  * @since Fruit Samurai 0.1
  */
 public class FileUtils {
-    private static Logger logger = LoggerFactory.getLogger("com.starkindustries.fruitsamurai.Utils.FileUtils");
+    private static final Logger logger = LoggerFactory.getLogger(FileUtils.class.getName());
     /**
      * Loads a file and creates a String from it
-     * @param file
+     * @param filepath
      * @author Aszalós Roland
      * @version 1.0
      * @since Fruit Samurai 0.1
      * @return string from file
      */
-    public static String loadAsString(URL file)
+    public static String loadAsString(String filepath)
     {
-        logger.debug("URL:{}",file);
+        logger.debug("Path to file: {}",filepath);
         StringBuilder result = new StringBuilder();
         try 
         {
-            BufferedReader reader = new BufferedReader(new FileReader(file.getPath()));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(FileUtils.class.getResourceAsStream(filepath)));
             String buffer = "";
             while((buffer = reader.readLine())!=null)
             {
@@ -58,19 +59,19 @@ public class FileUtils {
     }
     /**
      * Loads a file and creates a List from it
-     * @param file
+     * @param filepath
      * @author Aszalós Roland
      * @version 1.0
      * @since Fruit Samurai 0.1
      * @return string from file as {@link List}
      */
-    public static List<String> loadAsStringList(URL file)
+    public static List<String> loadAsStringList(String filepath)
     {
-        logger.debug("URL:{}",file);
+        logger.debug("Path to file: {}",filepath);
         List<String> result = new ArrayList<>();
         try 
         {
-            BufferedReader reader = new BufferedReader(new FileReader(file.getFile()));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(FileUtils.class.getResourceAsStream(filepath)));
             String buffer = "";
             while((buffer = reader.readLine())!=null)
             {
@@ -94,19 +95,11 @@ public class FileUtils {
      * @return string from file as a {@link ByteBuffer}
      * @throws IOException
      */
-    public static ByteBuffer ioResourceToByteBuffer(URL resource, int bufferSize) throws IOException {
-        logger.debug("URL:{}",resource);
+    public static ByteBuffer ioResourceToByteBuffer(String resource, int bufferSize) throws IOException {
+        logger.debug("Path to file: {}",resource);
         ByteBuffer buffer;
-
-        Path path = Paths.get(resource.getPath().substring(1));
-        if (Files.isReadable(path)) {
-            try (SeekableByteChannel fc = Files.newByteChannel(path)) {
-                buffer = BufferUtils.createByteBuffer((int) fc.size() + 1);
-                while (fc.read(buffer) != -1) ;
-            }
-        } else {
             try (
-                    InputStream source = resource.openStream();
+                    InputStream source = FileUtils.class.getResourceAsStream(resource);
                     ReadableByteChannel rbc = Channels.newChannel(source)) {
                 buffer = BufferUtils.createByteBuffer(bufferSize);
 
@@ -120,9 +113,17 @@ public class FileUtils {
                     }
                 }
             }
-        }
-
         buffer.flip();
         return buffer;
+    }
+    public static File stream2file (InputStream in) throws IOException {
+        final String PREFIX = "stream2file";
+        final String SUFFIX = ".obj";
+        final File tempFile = File.createTempFile(PREFIX, SUFFIX);
+        tempFile.deleteOnExit();
+        try (FileOutputStream out = new FileOutputStream(tempFile)) {
+            IOUtils.copy(in, out);
+        }
+        return tempFile;
     }
 }

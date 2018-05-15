@@ -36,7 +36,7 @@ public class Texture {
      * @param path
      * @throws Exception
      */
-    public Texture(URL path) throws Exception {
+    public Texture(String path) throws Exception {
         texture = load(path);
     }
 
@@ -94,11 +94,12 @@ public class Texture {
      * Loads a texture from an image.
      * @param path
      * @throws Exception
+     * @return textureID
      */
-    private int load(URL path) throws Exception {
+    private int load(String path) throws Exception {
         int[] pixels = null;
         try {
-            BufferedImage image = ImageIO.read(new FileInputStream(path.getFile()));
+            BufferedImage image = ImageIO.read(Texture.class.getResourceAsStream(path));
             width = image.getWidth();
             height = image.getHeight();
             size = width * height;

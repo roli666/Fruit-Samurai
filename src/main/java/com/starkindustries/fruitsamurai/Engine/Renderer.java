@@ -43,6 +43,7 @@ public class Renderer {
      * @author Aszalós Roland
      * @version 1.0
      * @since Fruit Samurai 0.1
+     * @throws Exception
      */
     public void init(Window window) throws Exception {
         ambient_light = new Vector4f(1, 1, 1, 1);
@@ -59,8 +60,8 @@ public class Renderer {
      */
     private void setupWorldShader() throws Exception {
         shaderProgram = new Shader();
-        shaderProgram.createVertexShader(FileUtils.loadAsString(Renderer.class.getResource("/shaders/bg_def.vs")));
-        shaderProgram.createFragmentShader(FileUtils.loadAsString(Renderer.class.getResource("/shaders/bg_def.fs")));
+        shaderProgram.createVertexShader(FileUtils.loadAsString("/shaders/bg_def.vs"));
+        shaderProgram.createFragmentShader(FileUtils.loadAsString("/shaders/bg_def.fs"));
         shaderProgram.link();
 
         shaderProgram.createUniform("projection_matrix");
@@ -102,6 +103,8 @@ public class Renderer {
     /**
      * Renders the World from the given list of {@link GameItem} objects, and binds the shaders.
      * Also sets the uniforms that the shader needs.
+     * @param window A standard {@link Window} object
+     * @param items A {@link List} of game items
      * @author Aszalós Roland
      * @version 1.0
      * @since Fruit Samurai 0.1

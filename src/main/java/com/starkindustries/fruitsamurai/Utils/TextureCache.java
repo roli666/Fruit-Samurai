@@ -14,7 +14,7 @@ import java.util.Map;
 public class TextureCache {
     private static TextureCache INSTANCE;
 
-    private Map<URL, Texture> texturesMap;
+    private Map<String, Texture> texturesMap;
 
     /**
      * Standard constructor initializes the TextureCache.
@@ -40,7 +40,7 @@ public class TextureCache {
      * @return a texture from the given path or from the texture cache if it already exists
      * @throws Exception
      */
-    public Texture getTexture(URL path) throws Exception {
+    public Texture getTexture(String path) throws Exception {
         Texture texture = texturesMap.get(path);
         if ( texture == null ) {
             texture = new Texture(path);

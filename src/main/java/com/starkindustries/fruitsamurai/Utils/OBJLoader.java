@@ -28,7 +28,7 @@ public class OBJLoader {
      * @version 1.0
      * @since Fruit Samurai 0.1
      */
-    public static Mesh loadmesh(URL file) throws Exception {
+    public static Mesh loadmesh(String file) throws Exception {
 
         List<String> lines = FileUtils.loadAsStringList(file);
         List<Vector3f> vertices = new ArrayList<>();
@@ -88,7 +88,6 @@ public class OBJLoader {
      * @param facesList
      * @param mat
      * @return {@link Mesh}
-     * @throws Exception
      * @author Aszalós Roland
      * @version 1.0
      * @since Fruit Samurai 0.1
@@ -131,8 +130,6 @@ public class OBJLoader {
      * @param indicesList
      * @param texCoordArr
      * @param normArr
-     * @return {@link Mesh}
-     * @throws Exception
      * @author Aszalós Roland
      * @version 1.0
      * @since Fruit Samurai 0.1

@@ -3,12 +3,19 @@ package com.starkindustries.fruitsamurai.Utils;
 import com.starkindustries.fruitsamurai.Graphics.Material;
 import com.starkindustries.fruitsamurai.Graphics.Mesh;
 import com.starkindustries.fruitsamurai.Graphics.Texture;
+import org.apache.commons.io.IOUtils;
 import org.joml.Vector4f;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.assimp.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +29,7 @@ import static org.lwjgl.assimp.Assimp.*;
  * @since Fruit Samurai 0.1
  */
 public class AssimpOBJLoader {
+    private static final Logger logger = LoggerFactory.getLogger(AssimpOBJLoader.class.getName());
     /**
      * Loads a file from the provided resource path.
      * @param resourcePath
@@ -31,7 +39,7 @@ public class AssimpOBJLoader {
      * @throws Exception
      * @return a {@link Mesh} array
      */
-    public static Mesh[] load(URL resourcePath) throws Exception {
+    public static Mesh[] load(String resourcePath) throws Exception {
         return load(resourcePath, aiProcess_JoinIdenticalVertices | aiProcess_Triangulate | aiProcess_FixInfacingNormals);
     }
     /**
@@ -44,10 +52,13 @@ public class AssimpOBJLoader {
      * @throws Exception
      * @return a {@link Mesh} array
      */
-    public static Mesh[] load(URL resourcePath, int flags) throws Exception {
-        AIScene aiScene = aiImportFile(resourcePath.getPath().substring(1), flags);
+    public static Mesh[] load(String resourcePath, int flags) throws Exception {
+        logger.debug("Res path: {}",resourcePath);
+        byte[] bytes = IOUtils.toByteArray(AssimpOBJLoader.class.getResourceAsStream(resourcePath));
+        ByteBuffer bb = BufferUtils.createByteBuffer(BufferUtils.null_terminate_byte_array(bytes));
+        AIScene aiScene = aiImportFile(bb, flags);
         if (aiScene == null) {
-            throw new Exception("Error loading model");
+            throw new IOException("Error loading model: " + aiGetErrorString());
         }
         int numMaterials = aiScene.mNumMaterials();
         PointerBuffer aiMaterials = aiScene.mMaterials();
@@ -83,7 +94,7 @@ public class AssimpOBJLoader {
         Texture texture = null;
         if (textPath != null && textPath.length() > 0) {
             TextureCache textCache = TextureCache.getInstance();
-            texture = textCache.getTexture(AssimpOBJLoader.class.getResource("/textures/"+textPath));
+            texture = textCache.getTexture(textPath);
         }
         Vector4f ambient = Material.DEFAULT_COLOUR;
         int result = aiGetMaterialColor(aiMaterial, AI_MATKEY_COLOR_AMBIENT, aiTextureType_NONE, 0, colour);
@@ -111,7 +122,6 @@ public class AssimpOBJLoader {
      * @author Aszalós Roland
      * @version 1.0
      * @since Fruit Samurai 0.1
-     * @throws Exception
      * @return {@link Mesh}
      */
     private static Mesh processMesh(AIMesh aiMesh, List<Material> materials) {
@@ -146,7 +156,6 @@ public class AssimpOBJLoader {
      * @author Aszalós Roland
      * @version 1.0
      * @since Fruit Samurai 0.1
-     * @throws Exception
      */
     private static void processVertices(AIMesh aiMesh, List<Float> vertices) {
         AIVector3D.Buffer aiVertices = aiMesh.mVertices();
@@ -164,7 +173,6 @@ public class AssimpOBJLoader {
      * @author Aszalós Roland
      * @version 1.0
      * @since Fruit Samurai 0.1
-     * @throws Exception
      */
     private static void processNormals(AIMesh aiMesh, List<Float> normals) {
         AIVector3D.Buffer aiNormals = aiMesh.mNormals();
@@ -182,7 +190,6 @@ public class AssimpOBJLoader {
      * @author Aszalós Roland
      * @version 1.0
      * @since Fruit Samurai 0.1
-     * @throws Exception
      */
     private static void processTextCoords(AIMesh aiMesh, List<Float> textures) {
         AIVector3D.Buffer textCoords = aiMesh.mTextureCoords(0);
@@ -200,7 +207,6 @@ public class AssimpOBJLoader {
      * @author Aszalós Roland
      * @version 1.0
      * @since Fruit Samurai 0.1
-     * @throws Exception
      */
     private static void processIndices(AIMesh aiMesh, List<Integer> indices) {
         int numFaces = aiMesh.mNumFaces();
