@@ -4,9 +4,7 @@ import com.starkindustries.fruitsamurai.Graphics.GameItem;
 import com.starkindustries.fruitsamurai.Graphics.Material;
 import com.starkindustries.fruitsamurai.Graphics.Mesh;
 import com.starkindustries.fruitsamurai.Graphics.Texture;
-import com.starkindustries.fruitsamurai.Utils.AssimpOBJLoader;
-import com.starkindustries.fruitsamurai.Utils.FileUtils;
-import com.starkindustries.fruitsamurai.Utils.OBJLoader;
+import com.starkindustries.fruitsamurai.Utils.*;
 
 /**
  * This class represents a fruit game item.
@@ -31,12 +29,14 @@ public class Fruit extends GameItem {
         fruitType = ft;
         super.menuItem = false;
         setScale(2);
-        Mesh melon_mesh = OBJLoader.loadmesh("/meshes/melon.obj");
-        Mesh apple_mesh = OBJLoader.loadmesh("/meshes/apple.obj");
-        Mesh orange_mesh = OBJLoader.loadmesh("/meshes/orange.obj");
-        Texture melon_t = new Texture("/textures/melon_t.png");
-        Texture orange_t = new Texture("/textures/orange_t.jpg");
-        Texture apple_t = new Texture("/textures/apple_t.png");
+        MeshCache mc = MeshCache.getInstance();
+        TextureCache tc = TextureCache.getInstance();
+        Mesh melon_mesh = mc.getMesh("/meshes/melon.obj");
+        Mesh apple_mesh = mc.getMesh("/meshes/apple.obj");
+        Mesh orange_mesh = mc.getMesh("/meshes/orange.obj");
+        Texture melon_t = tc.getTexture("/textures/melon_t.png");
+        Texture orange_t = tc.getTexture("/textures/orange_t.jpg");
+        Texture apple_t = tc.getTexture("/textures/apple_t.png");
         melon_mesh.setMaterial(new Material());
         melon_mesh.getMaterial().setTexture(melon_t);
         orange_mesh.setMaterial(new Material());
