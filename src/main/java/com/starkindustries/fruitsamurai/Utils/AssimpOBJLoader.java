@@ -23,11 +23,13 @@ import java.util.List;
 import static org.lwjgl.assimp.Assimp.*;
 /**
  * This class is used to load complex Models into the Game.
- * The AI objects use the {@link Assimp} class for more information check the official <a href="https://github.com/assimp/assimp">Assimp</a> website
+ * The AI objects use the {@link Assimp} class for more information check the official <a href="https://github.com/assimp/assimp">Assimp</a> website.
+ * Deprecated class since I couldn't import OBJ files from InputStream correctly.
  * @author Aszalós Roland
  * @version 1.0
  * @since Fruit Samurai 0.1
  */
+@Deprecated
 public class AssimpOBJLoader {
     private static final Logger logger = LoggerFactory.getLogger(AssimpOBJLoader.class.getName());
     /**
