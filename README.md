@@ -1,2 +1,2 @@
-Valami ilyesmi játékot próbáltam csinálni OpenGL-be.(Fruit Ninja)
+Fruit Ninja implementáció OpenGL-be.
 https://www.youtube.com/watch?v=Eg37mrTLKqM
